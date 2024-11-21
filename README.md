@@ -13,8 +13,8 @@ Note: If you are using Eclipse, please have git CLI installed on your system or 
 ### SetUp Instructions
 1. Please clone the repository on your local system
 2. For Eclipse Import the project as Existing Maven Project, For IntelliJ you can directlty open it using 'Get from VCS'.
-4. All code should be pushed to the main branch
-3. Ensure the GitHub actions are successful post push
+3. All code should be pushed to the main branch
+4. Ensure the GitHub actions are successful post push
 
 Submissions will have deadlines, failed GitHub Actions would result in point deductions.
 
