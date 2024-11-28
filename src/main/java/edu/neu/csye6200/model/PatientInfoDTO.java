@@ -9,6 +9,7 @@ public class PatientInfoDTO {
     private String gender;
     private String userId;
     private String password;
+    private String medicalRecordNo;
 
     // Getter and Setter methods for firstName
     public String getFirstName() {
@@ -71,5 +72,13 @@ public class PatientInfoDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMedicalRecordNo() {
+        return medicalRecordNo;
+    }
+
+    public void setMedicalRecordNo(String medicalRecordNo) {
+        this.medicalRecordNo = medicalRecordNo;
     }
 }

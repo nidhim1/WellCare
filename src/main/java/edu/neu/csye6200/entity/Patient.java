@@ -12,8 +12,8 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientId;
 
-    @Column(name = "medical_record_no", columnDefinition = "CHAR(6)")
-    private String medicalRecordNo;
+    @Column(name = "medical_record_no", columnDefinition = "CHAR(6)", nullable = false)
+    private String medicalRecordNo = "000000"; // Default placeholder value
 
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
@@ -46,80 +46,81 @@ public class Patient {
         Male, Female, Other
     }
 
+    // Getters and Setters
     public int getPatientId() {
         return patientId;
-    }
-
-    public String getMedicalRecordNo() {
-        return medicalRecordNo;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public Date getRegisterTimestamp() {
-        return registerTimestamp;
     }
 
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
+    public String getMedicalRecordNo() {
+        return medicalRecordNo;
+    }
+
     public void setMedicalRecordNo(String medicalRecordNo) {
         this.medicalRecordNo = medicalRecordNo;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getMiddleName() {
+        return middleName;
+    }
+
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
     public void setDob(Date dob) {
         this.dob = dob;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Date getRegisterTimestamp() {
+        return registerTimestamp;
     }
 
     public void setRegisterTimestamp(Date registerTimestamp) {
