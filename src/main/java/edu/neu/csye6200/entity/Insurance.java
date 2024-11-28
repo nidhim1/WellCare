@@ -1,6 +1,7 @@
 package edu.neu.csye6200.entity;
 
 import jakarta.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -17,6 +18,13 @@ public class Insurance {
 
     @Column(name = "insurance_provider", length = 100, nullable = false)
     private String insuranceProvider;
+
+    @Column(name = "insurance_type", length = 50, nullable = false)
+    private String insuranceType;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "insurance_date", nullable = false)
+    private Date insuranceDate;
 
     @Column(name = "insurance_number", length = 50, nullable = false, unique = true)
     private String insuranceNumber;
@@ -41,6 +49,26 @@ public class Insurance {
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
+
+    public String getInsuranceType() {
+        return insuranceType; // Getter for insuranceType
+    }
+
+    public void setInsuranceType(String insuranceType) {
+        this.insuranceType = insuranceType;
+
+    }
+
+    public Date getInsuranceDate() {
+        return insuranceDate; // Getter for insuranceDate
+    }
+
+    public void setInsuranceDate(Date insuranceDate) {
+        this.insuranceDate = insuranceDate; // Setter for insuranceDate
+    }
+
+
+
 
     public String getInsuranceProvider() {
         return insuranceProvider;
