@@ -73,6 +73,7 @@ public class PatientInfoImpl implements PatientInfo {
         patient.setLastName(dto.getLastName());
         patient.setUserName(dto.getUserId());
         patient.setPassword(dto.getPassword());
+        patient.setMedicalRecordNo(dto.getMedicalRecordNo());
         patient.setGender(Patient.Gender.valueOf(dto.getGender()));
         try {
             patient.setDob(dateFormat.parse(dto.getDob()));
@@ -91,6 +92,8 @@ public class PatientInfoImpl implements PatientInfo {
         dto.setPassword(entity.getPassword());
         dto.setGender(entity.getGender().name());
         dto.setDob(dateFormat.format(entity.getDob()));
+        dto.setMedicalRecordNo(entity.getMedicalRecordNo()); // Map the medicalRecordNo field
         return dto;
     }
+
 }

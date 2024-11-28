@@ -12,8 +12,8 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientId;
 
-    @Column(name = "medical_record_no", columnDefinition = "CHAR(6)", nullable = false)
-    private String medicalRecordNo = "000000"; // Default placeholder value
+    @Column(name = "medical_record_no", columnDefinition = "CHAR(6)")
+    private String medicalRecordNo;
 
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
