@@ -17,13 +17,13 @@ public class PatientContactInfoServiceImpl implements PatientContactInfoService 
     public PatientContactInfoDTO savePatientContactInfo(PatientContactInfoDTO patientContactInfoDTO) {
 
         PatientContactInfoEntity patientContactInfoEntity = new PatientContactInfoEntity();
-        patientContactInfoEntity.setPatientId(patientContactInfoDTO.getPatientId());
-        patientContactInfoEntity.setPhoneNumber(patientContactInfoDTO.getPhoneNumber());
+        patientContactInfoEntity.setPatientId((long) patientContactInfoDTO.getPatientId());
+        patientContactInfoEntity.setPhoneNumber(Integer.parseInt(String.valueOf(patientContactInfoDTO.getPhoneNumber())));
         patientContactInfoEntity.setEmail(patientContactInfoDTO.getEmail());
         patientContactInfoEntity.setAddress(patientContactInfoDTO.getAddress());
         patientContactInfoEntity.setCity(patientContactInfoDTO.getCity());
         patientContactInfoEntity.setState(patientContactInfoDTO.getState());
-        patientContactInfoEntity.setPostalCode(patientContactInfoDTO.getPostalCode());
+        patientContactInfoEntity.setPostalCode(patientContactInfoEntity.getPostalCode());
         patientContactInfoEntity.setCountry(patientContactInfoDTO.getCountry());
 
 
