@@ -20,20 +20,24 @@ public class InsuranceServiceImpl implements InsuranceService {
 
     @Override
     public List<InsuranceDTO> getAllInsurance() {
-        List<Insurance> insurances = insuranceRepository.findAll();
-
-        // Map the list of Insurance entities to a list of InsuranceDTOs
-        return insurances.stream().map(insurance -> {
+        return insuranceRepository.findAll().stream().map(insurance -> {
             InsuranceDTO dto = new InsuranceDTO();
-            dto.setPatientId(insurance.getPatientId());
             dto.setInsuranceNumber(insurance.getInsuranceNumber());
             dto.setInsuranceProvider(insurance.getInsuranceProvider());
-            dto.setInsuranceType(insurance.getInsuranceType());
-            dto.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").format(insurance.getInsuranceDate()));
             dto.setCoverageDetails(insurance.getCoverageDetails());
+            dto.setInsuranceType(insurance.getInsuranceType());
+
+            // Handle null insuranceDate
+            if (insurance.getInsuranceDate() != null) {
+                dto.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").format(insurance.getInsuranceDate()));
+            } else {
+                dto.setInsuranceDate(null); // Or set a default value, e.g., "N/A"
+            }
+
             return dto;
         }).collect(Collectors.toList());
     }
+
 
 
     @Override
