@@ -16,11 +16,13 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-        boolean isAuthenticated = loginService.authenticate(loginDTO.getUsername(), loginDTO.getPassword());
+        boolean isPatientAuthenticated = loginService.authenticatePatient(loginDTO.getUsername(), loginDTO.getPassword());
+        boolean isStaffAuthenticated = loginService.authenticatePatient(loginDTO.getUsername(), loginDTO.getPassword());
 
-        if (isAuthenticated) {
-//            return ResponseEntity.ok("Login successful");
-            return ResponseEntity.ok("/dashboard");
+        if (isPatientAuthenticated) {
+            return ResponseEntity.ok("/patient-dashboard");
+        } else if (isStaffAuthenticated) {
+            return ResponseEntity.ok("/staff-dashboard");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Username or Password");
         }

@@ -11,7 +11,7 @@ public class LoginDTO {
 
     @NotNull(message = "Please fill password")
     @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 6, message = "Password should be greater than 6 charactes")
+    @Size(min = 6, message = "Password should be greater than 6 characters")
     private String password;
 
     public String getUsername() {

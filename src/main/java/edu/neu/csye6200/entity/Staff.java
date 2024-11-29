@@ -21,6 +21,12 @@ public class Staff {
     @Column(name = "last_name", length = 50, nullable = false)
     private String lastName;
 
+    @Column(name = "username", length = 200)
+    private String userName;
+
+    @Column(name = "password", length = 200)
+    private String password;
+
     @Column(name = "role", length = 50)
     private String role;
 
@@ -35,7 +41,7 @@ public class Staff {
 
     @Column(name = "hire_date")
     @Temporal(TemporalType.DATE)
-    private String hireDate;
+    private java.sql.Date hireDate;
 
     @Column(name = "availability")
     private boolean availability;
@@ -79,7 +85,7 @@ public class Staff {
         return email;
     }
 
-    public String getHireDate() {
+    public java.sql.Date getHireDate() {
         return hireDate;
     }
 
@@ -127,7 +133,7 @@ public class Staff {
         this.email = email;
     }
 
-    public void setHireDate(String hireDate) {
+    public void setHireDate(java.sql.Date hireDate) {
         this.hireDate = hireDate;
     }
 
