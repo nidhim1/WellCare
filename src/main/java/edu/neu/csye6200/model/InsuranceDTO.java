@@ -3,6 +3,7 @@ package edu.neu.csye6200.model;
 
 public class InsuranceDTO {
     private String insuranceNumber;
+    private int patientId;
     private String insuranceType;
     private String insuranceDate;
     private String coverageDetails;
@@ -16,6 +17,10 @@ public class InsuranceDTO {
     public void setInsuranceNumber(String insuranceNumber) {
         this.insuranceNumber = insuranceNumber;
     }
+
+    public Integer getPatientId() { return patientId; }
+
+    public void setPatientId(int patientId) { this.patientId = patientId; }
 
     public String getInsuranceType() {
         return insuranceType;

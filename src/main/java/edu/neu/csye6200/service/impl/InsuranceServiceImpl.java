@@ -15,26 +15,34 @@ public class InsuranceServiceImpl implements InsuranceService {
 
     @Override
     public InsuranceDTO saveInsurance(InsuranceDTO insuranceDTO) {
-        // Map InsuranceDTO to Insurance entity
         Insurance insurance = new Insurance();
+        insurance.setPatientId(insuranceDTO.getPatientId());
         insurance.setInsuranceNumber(insuranceDTO.getInsuranceNumber());
         insurance.setInsuranceProvider(insuranceDTO.getInsuranceProvider());
+        insurance.setInsuranceType(insuranceDTO.getInsuranceType());
+
+        // Handle nullable insurance_date
+        if (insuranceDTO.getInsuranceDate() != null && !insuranceDTO.getInsuranceDate().isEmpty()) {
+            insurance.setInsuranceDate(parseInsuranceDate(insuranceDTO.getInsuranceDate()));
+        } else {
+            insurance.setInsuranceDate(null); // Set null if no date provided
+        }
+
         insurance.setCoverageDetails(insuranceDTO.getCoverageDetails());
 
-        // Parse and map additional fields (e.g., date and type)
-//        insurance.setInsuranceType(insuranceDTO.getInsuranceType());
-//        insurance.setInsuranceDate(parseInsuranceDate(insuranceDTO.getInsuranceDate()));
-
-        // Save the entity in the database
         Insurance savedInsurance = insuranceRepository.save(insurance);
 
-        // Map the saved Insurance entity back to a DTO
         InsuranceDTO savedInsuranceDTO = new InsuranceDTO();
+        savedInsuranceDTO.setPatientId(savedInsurance.getPatientId());
         savedInsuranceDTO.setInsuranceNumber(savedInsurance.getInsuranceNumber());
         savedInsuranceDTO.setInsuranceProvider(savedInsurance.getInsuranceProvider());
+        savedInsuranceDTO.setInsuranceType(savedInsurance.getInsuranceType());
+        savedInsuranceDTO.setInsuranceDate(
+                savedInsurance.getInsuranceDate() != null
+                        ? formatInsuranceDate(savedInsurance.getInsuranceDate())
+                        : null
+        );
         savedInsuranceDTO.setCoverageDetails(savedInsurance.getCoverageDetails());
-//        savedInsuranceDTO.setInsuranceType(savedInsurance.getInsuranceType());
-//        savedInsuranceDTO.setInsuranceDate(formatInsuranceDate(savedInsurance.getInsuranceDate()));
 
         return savedInsuranceDTO;
     }

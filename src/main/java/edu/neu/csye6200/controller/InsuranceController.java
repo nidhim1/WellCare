@@ -20,9 +20,9 @@ public class InsuranceController {
     }
 
     @PostMapping("/Insurance")
-    public InsuranceDTO saveInsurance(@RequestBody InsuranceDTO InsuranceDTO){
-        insuranceService.saveInsurance(InsuranceDTO);
-        System.out.println(InsuranceDTO);
-        return InsuranceDTO;
+    public InsuranceDTO saveInsurance(@RequestBody InsuranceDTO insuranceDTO) {
+        System.out.println("Received payload: " + insuranceDTO);
+        return insuranceService.saveInsurance(insuranceDTO);
     }
+
 }

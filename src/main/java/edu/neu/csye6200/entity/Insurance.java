@@ -13,23 +13,23 @@ public class Insurance {
     @Column(name = "insurance_id")
     private int insuranceId;
 
-    @Column(name = "patient_id", nullable = false)
+    @Column(name = "patient_id", nullable = true)
     private int patientId;
 
-    @Column(name = "insurance_provider", length = 100, nullable = false)
+    @Column(name = "insurance_provider", length = 100, nullable = true)
     private String insuranceProvider;
 
     @Column(name = "insurance_type", length = 50, nullable = false)
     private String insuranceType;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "insurance_date", nullable = false)
+    @Column(name = "insurance_date", nullable = true)
     private Date insuranceDate;
 
     @Column(name = "insurance_number", length = 50, nullable = false, unique = true)
     private String insuranceNumber;
 
-    @Column(name = "coverage_details", length = 500, nullable = false)
+    @Column(name = "coverage_details", length = 500, nullable = true)
     private String coverageDetails;
 
 
