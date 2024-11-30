@@ -1,8 +1,13 @@
 package edu.neu.csye6200.service;
 
 import edu.neu.csye6200.model.InsuranceDTO;
+import java.util.List;
 
 public interface InsuranceService {
-
-    public InsuranceDTO saveInsurance(InsuranceDTO insuranceDTO);
+    InsuranceDTO saveInsurance(InsuranceDTO insuranceDTO);
+    List<InsuranceDTO> getAllInsurance();
+    InsuranceDTO getInsuranceById(int id);
+    InsuranceDTO updateInsurance(int id, InsuranceDTO insuranceDTO);
+    void deleteInsurance(int id);
 }
+

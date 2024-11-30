@@ -10,4 +10,10 @@ public class PageController {
     public String showLoginPage() {
         return "login";
     }
+
+
+@GetMapping("/insurance")
+public String showInsurancePage() {
+    return "insurance";
+}
 }
