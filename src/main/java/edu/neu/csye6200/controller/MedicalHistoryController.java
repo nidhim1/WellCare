@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/medical-history")
+@RequestMapping("/api/medicalhistory")
 public class MedicalHistoryController {
 
     @Autowired
     private MedicalHistoryService medicalHistoryService;
 
     // Get all medical histories
-    @GetMapping
+    @GetMapping("/MedicalHistory")
     public ResponseEntity<List<MedicalHistoryDTO>> getAllMedicalHistories() {
         List<MedicalHistoryDTO> histories = medicalHistoryService.getAllMedicalHistory();
         return ResponseEntity.ok(histories);
     }
 
     // Get medical history by ID
-    @GetMapping("/{id}")
+    @GetMapping("/MedicalHistory/{id}")
     public ResponseEntity<MedicalHistoryDTO> getMedicalHistoryById(@PathVariable Long id) {
         MedicalHistoryDTO history = medicalHistoryService.getMedicalHistoryById(id);
         return ResponseEntity.ok(history);
     }
 
     // Create new medical history
-    @PostMapping
+    @PostMapping("/MedicalHistory")
     public ResponseEntity<MedicalHistoryDTO> createMedicalHistory(@Valid @RequestBody MedicalHistoryDTO medicalHistoryDTO) {
         MedicalHistoryDTO savedHistory = medicalHistoryService.saveMedicalHistory(medicalHistoryDTO);
         return ResponseEntity.ok(savedHistory);
@@ -40,7 +40,7 @@ public class MedicalHistoryController {
 
 
     // Update existing medical history by ID
-    @PutMapping("/{id}")
+    @PutMapping("/MedicalHistory/{id}")
     public ResponseEntity<MedicalHistoryDTO> updateMedicalHistory(
             @PathVariable Long id,
             @RequestBody MedicalHistoryDTO medicalHistoryDTO) {
@@ -49,7 +49,7 @@ public class MedicalHistoryController {
     }
 
     // Delete medical history by ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/MedicalHistory/{id}")
     public ResponseEntity<String> deleteMedicalHistory(@PathVariable Long id) {
         medicalHistoryService.deleteMedicalHistory(id);
         return ResponseEntity.ok("Medical history deleted successfully.");
