@@ -25,38 +25,65 @@ public class MedicalHistoryImpl implements MedicalHistoryService {
 
     @Override
     public MedicalHistoryDTO getMedicalHistoryById(Long id) {
+        // Fetching the MedicalHistory entity from the repository
         MedicalHistory history = medicalHistoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Medical History not found with id: " + id));
-        return convertToDTO(history);
+                .orElseThrow(() -> new RuntimeException("Medical history not found with id: " + id));
+
+        // Converting MedicalHistory entity to MedicalHistoryDTO
+        MedicalHistoryDTO historyDTO = new MedicalHistoryDTO();
+
+        // Setting the properties of DTO using the fetched entity
+        historyDTO.setHistoryId(history.getHistoryId());
+        historyDTO.setPatientId(history.getPatientId());
+        historyDTO.setAllergies(history.getAllergies());
+        historyDTO.setPastDiseases(history.getPastDiseases());
+        historyDTO.setOngoingMedication(history.getOngoingMedication());
+        historyDTO.setCreatedAt(history.getCreatedAt());
+        historyDTO.setUpdatedAt(history.getUpdatedAt());
+        historyDTO.setDoctorNotes(history.getDoctorNotes());
+        historyDTO.setAllergyType(history.getAllergyType());
+        historyDTO.setSeverityOfAllergy(history.getSeverityOfAllergy());
+        historyDTO.setActive(history.getIsActive());
+        historyDTO.setMedicationChanges(history.getMedicationChanges());
+        historyDTO.setPatientNotes(history.getPatientNotes());
+        historyDTO.setHistoryStatus(history.getHistoryStatus());
+
+        // Returning the DTO
+        return historyDTO;
     }
+
 
     @Override
     public MedicalHistoryDTO updateMedicalHistory(Long id, MedicalHistoryDTO patientMedicalHistoryDTO) {
         MedicalHistory history = medicalHistoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Medical History not found with id: " + id));
 
-        history.setAllergies(MedicalHistoryDTO.getAllergies());
-        history.setPastDiseases(MedicalHistoryDTO.getPastDiseases());
-        history.setOngoingMedication(MedicalHistoryDTO.getOngoingMedication());
+        // Corrected: Use the patientMedicalHistoryDTO instance to get values
+        history.setAllergies(patientMedicalHistoryDTO.getAllergies());
+        history.setPastDiseases(patientMedicalHistoryDTO.getPastDiseases());
+        history.setOngoingMedication(patientMedicalHistoryDTO.getOngoingMedication());
         history.setUpdatedAt(LocalDateTime.now());
-        history.setDoctorNotes(MedicalHistoryDTO.getDoctorNotes());
-        history.setAllergyType(MedicalHistoryDTO.getAllergyType());
-        history.setSeverityOfAllergy(MedicalHistoryDTO.getSeverityOfAllergy());
-        history.setActive(MedicalHistoryDTO.isActive());
-        history.setMedicationChanges(MedicalHistoryDTO.getMedicationChanges());
-        history.setPatientNotes(MedicalHistoryDTO.getPatientNotes());
-        history.setHistoryStatus(MedicalHistoryDTO.getHistoryStatus());
+        history.setDoctorNotes(patientMedicalHistoryDTO.getDoctorNotes());
+        history.setAllergyType(patientMedicalHistoryDTO.getAllergyType());
+        history.setSeverityOfAllergy(patientMedicalHistoryDTO.getSeverityOfAllergy());
+        history.setActive(patientMedicalHistoryDTO.isActive());
+        history.setMedicationChanges(patientMedicalHistoryDTO.getMedicationChanges());
+        history.setPatientNotes(patientMedicalHistoryDTO.getPatientNotes());
+        history.setHistoryStatus(patientMedicalHistoryDTO.getHistoryStatus());
 
+        // Save the updated entity to the repository
         MedicalHistory updatedHistory = medicalHistoryRepository.save(history);
 
+        // Convert the updated entity to DTO and return it
         return convertToDTO(updatedHistory);
     }
 
+
     @Override
     public void deleteMedicalHistory(Long id) {
-        MedicalHistory history = medicalHistoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Medical History not found with id: " + id));
-        medicalHistoryRepository.delete(history);
+        medicalHistoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medical history not found with id: " + id));
+        medicalHistoryRepository.deleteById(id);
     }
 
     @Override
@@ -93,7 +120,7 @@ public class MedicalHistoryImpl implements MedicalHistoryService {
         dto.setDoctorNotes(history.getDoctorNotes());
         dto.setAllergyType(history.getAllergyType());
         dto.setSeverityOfAllergy(history.getSeverityOfAllergy());
-        dto.setActive(history.isActive());
+        dto.setActive(history.getIsActive());
         dto.setMedicationChanges(history.getMedicationChanges());
         dto.setPatientNotes(history.getPatientNotes());
         dto.setHistoryStatus(history.getHistoryStatus());

@@ -75,6 +75,5 @@ public class MedicalHistoryDTO {
 
     public String getHistoryStatus() { return historyStatus; }
 
-    public void setHistoryStatus(String historyStatus) { this.historyStatus = historyStatus;}
+    public void setHistoryStatus(String historyStatus) { this.historyStatus = historyStatus; }
 }
-

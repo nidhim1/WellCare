@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedicalHistoryRepository extends JpaRepository<MedicalHistory, Long> {
-    // Add custom query methods as needed, for example:
-    // Optional<PatientMedicalHistory> findByHistoryStatus(String historyStatus);
 }
+

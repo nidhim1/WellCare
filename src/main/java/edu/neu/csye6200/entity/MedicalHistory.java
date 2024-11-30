@@ -1,12 +1,13 @@
 package edu.neu.csye6200.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-@Table(name = "patient_medical_history")
+@Table(name = "medicalhistory")
 public class MedicalHistory {
 
     @Id
@@ -14,8 +15,9 @@ public class MedicalHistory {
     @Column(name = "history_id")
     private Long historyId;
 
+
     @Column(name = "patient_id", nullable = true)
-    private Integer patientId;
+    private Long patientId;
 
     @Column(name = "allergies", columnDefinition = "TEXT", nullable = true)
     private String allergies;
@@ -28,13 +30,13 @@ public class MedicalHistory {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
-    private Date createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = true)
-    @org.hibernate.annotations.UpdateTimestamp
-    private Date updatedAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @Column(name = "doctor_notes", columnDefinition = "TEXT", nullable = true)
     private String doctorNotes;
@@ -71,7 +73,7 @@ public class MedicalHistory {
         return patientId;
     }
 
-    public void setPatientId(Integer patientId) {
+    public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
 
@@ -103,7 +105,7 @@ public class MedicalHistory {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -111,7 +113,7 @@ public class MedicalHistory {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -169,5 +171,8 @@ public class MedicalHistory {
 
     public void setHistoryStatus(String historyStatus) {
         this.historyStatus = historyStatus;
+    }
+
+    public void setActive(boolean active) {
     }
 }

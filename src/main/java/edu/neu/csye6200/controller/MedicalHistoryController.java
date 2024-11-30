@@ -1,52 +1,57 @@
 package edu.neu.csye6200.controller;
 
-
+import edu.neu.csye6200.entity.MedicalHistory;
 import edu.neu.csye6200.model.MedicalHistoryDTO;
 import edu.neu.csye6200.service.MedicalHistoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/history")
-public class PatientMedicalHistoryController {
+@RequestMapping("/api/medical-history")
+public class MedicalHistoryController {
 
     @Autowired
-    private MedicalHistoryService MedicalHistoryService;
+    private MedicalHistoryService medicalHistoryService;
 
-    // Get all patient medical history records
+    // Get all medical histories
     @GetMapping
-    public List<MedicalHistoryDTO> getAllHistory() {
-        return MedicalHistoryService.getAllHistory();
+    public ResponseEntity<List<MedicalHistoryDTO>> getAllMedicalHistories() {
+        List<MedicalHistoryDTO> histories = medicalHistoryService.getAllMedicalHistory();
+        return ResponseEntity.ok(histories);
     }
 
     // Get medical history by ID
     @GetMapping("/{id}")
-    public ResponseEntity<MedicalHistoryDTO> getHistoryById(@PathVariable Long id) {
-        MedicalHistoryDTO history = MedicalHistoryService.getHistoryById(id);
-        return history != null ? ResponseEntity.ok(history) : ResponseEntity.notFound().build();
+    public ResponseEntity<MedicalHistoryDTO> getMedicalHistoryById(@PathVariable Long id) {
+        MedicalHistoryDTO history = medicalHistoryService.getMedicalHistoryById(id);
+        return ResponseEntity.ok(history);
     }
 
-    // Create a new medical history record
+    // Create new medical history
     @PostMapping
-    public ResponseEntity<MedicalHistoryDTO> createHistory(@RequestBody MedicalHistoryDTO patientMedicalHistoryDTO) {
-        MedicalHistoryDTO createdHistory = MedicalHistoryService.createHistory(patientMedicalHistoryDTO);
-        return ResponseEntity.status(201).body(createdHistory);
+    public ResponseEntity<MedicalHistoryDTO> createMedicalHistory(@Valid @RequestBody MedicalHistoryDTO medicalHistoryDTO) {
+        MedicalHistoryDTO savedHistory = medicalHistoryService.saveMedicalHistory(medicalHistoryDTO);
+        return ResponseEntity.ok(savedHistory);
     }
 
-    // Update an existing medical history record
+
+    // Update existing medical history by ID
     @PutMapping("/{id}")
-    public ResponseEntity<MedicalHistoryDTO> updateHistory(@PathVariable Long id, @RequestBody MedicalHistoryDTO MedicalHistoryDTO) {
-        MedicalHistoryDTO updatedHistory = MedicalHistoryService.updateHistory(id, patientMedicalHistoryDTO);
+    public ResponseEntity<MedicalHistoryDTO> updateMedicalHistory(
+            @PathVariable Long id,
+            @RequestBody MedicalHistoryDTO medicalHistoryDTO) {
+        MedicalHistoryDTO updatedHistory = medicalHistoryService.updateMedicalHistory(id, medicalHistoryDTO);
         return ResponseEntity.ok(updatedHistory);
     }
 
-    // Delete a medical history record
+    // Delete medical history by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHistory(@PathVariable Long id) {
-        MedicalHistoryService.deleteHistory(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteMedicalHistory(@PathVariable Long id) {
+        medicalHistoryService.deleteMedicalHistory(id);
+        return ResponseEntity.ok("Medical history deleted successfully.");
     }
 }
