@@ -2,6 +2,8 @@ package edu.neu.csye6200.model;
 
 
 public class InsuranceDTO {
+
+    // Private fields
     private String insuranceNumber;
     private int patientId;
     private String insuranceType;
@@ -9,7 +11,7 @@ public class InsuranceDTO {
     private String coverageDetails;
     private String insuranceProvider;
 
-
+    // public Getter and Setter methods
     public String getInsuranceNumber() {
         return insuranceNumber;
     }
