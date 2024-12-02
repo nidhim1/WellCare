@@ -1,8 +1,7 @@
-package edu.neu.csye6200.service.impl;
+package edu.neu.csye6200.repository;
 
 import edu.neu.csye6200.entity.Patient;
 import edu.neu.csye6200.entity.Staff;
-import edu.neu.csye6200.repository.LoginRespository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
