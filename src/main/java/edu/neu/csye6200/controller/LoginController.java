@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1")
 public class LoginController {
@@ -18,20 +21,25 @@ public class LoginController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDTO) {
         boolean isPatientAuthenticated = loginService.authenticatePatient(loginDTO.getUsername(), loginDTO.getPassword());
         boolean isStaffAuthenticated = loginService.authenticateStaff(loginDTO.getUsername(), loginDTO.getPassword());
 
+        Map<String, String> response = new HashMap<>();
         if (isPatientAuthenticated) {
             String token = jwtUtil.generateToken(loginDTO.getUsername());
 //            return ResponseEntity.ok("/patient-dashboard");
-            return ResponseEntity.ok(token);
+            response.put("token", token);
+            response.put("redirectUrl", "/patient-dashboard");
+            return ResponseEntity.ok(response);
         } else if (isStaffAuthenticated) {
             String token = jwtUtil.generateToken(loginDTO.getUsername());
 //            return ResponseEntity.ok("/staff-dashboard");
-            return ResponseEntity.ok(token);
+            response.put("token", token);
+            response.put("redirectUrl", "/staff-dashboard");
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Username or Password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 }
