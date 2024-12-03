@@ -52,6 +52,8 @@ public class StaffServiceImpl implements StaffService {
         staff.setEmail(staffDTO.getEmail());
         staff.setAvailability(staffDTO.isAvailability());
         staff.setSpecialization(staffDTO.getSpecialization());
+        staff.setUserName(staff.getUserName());
+        staff.setPassword(staffDTO.getPassword());
     }
 
     private StaffDTO mapEntityToDto(Staff staff) {
@@ -66,6 +68,8 @@ public class StaffServiceImpl implements StaffService {
         staffDTO.setEmail(staff.getEmail());
         staffDTO.setAvailability(staff.isAvailability());
         staffDTO.setSpecialization(staff.getSpecialization());
+        staffDTO.setUsername(staff.getUserName());
+        staffDTO.setPassword(staff.getPassword());
         return staffDTO;
     }
 }
