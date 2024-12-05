@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Patient Information - Dashboard</title>
+    <title>Prescriptions Information - Dashboard</title>
     <!-- Favicon -->
     <link href="/img/brand/favicon.png" rel="icon" type="image/png">
     <!-- Fonts -->
@@ -162,98 +162,90 @@
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
         <span class="mask bg-gradient-default opacity-8"></span>
         <div class="container-fluid d-flex align-items-center">
-            <h1 class="text-white">Patient Information Management</h1>
+            <h1 class="text-white">Prescription Management</h1>
         </div>
     </div>
 
     <!-- Page content -->
     <div class="container mt-5">
-        <h2 class="mb-4">Manage Patient Information</h2>
-        <!-- Table for Patient Records -->
+        <h2 class="mb-4">Prescription Information</h2>
+        <!-- Table for Prescription Records -->
         <table class="table">
             <thead>
             <tr>
+                <th>Prescription ID</th>
                 <th>Patient ID</th>
-                <th>Medical Record No</th> <!-- NEWLY ADDED FIELD -->
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>User Name</th> <!-- NEWLY ADDED FIELD -->
-                <th>Password</th>
-                <th>DOB</th>
-                <th>Gender</th> <!-- NEWLY ADDED FIELD -->
+                <th>Staff ID</th>
+                <th>Issue Date</th>
+                <th>Medication</th>
+                <th>Dosage</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Timestamp</th>
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody id="patient-table-body">
+            <tbody id="prescription-table-body">
             <!-- Rows will be dynamically added here -->
             </tbody>
         </table>
-        <button class="btn btn-primary" onclick="openAddPatientModal()">Add New Patient</button>
+        <button class="btn btn-primary" onclick="openAddPrescriptionModal()">Add New Prescription</button>
     </div>
 
-    <div class="modal fade" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="patientModalLabel" aria-hidden="true">
+    <!-- Prescription Modal -->
+    <div class="modal fade" id="PrescriptionModal" tabindex="-1" role="dialog" aria-labelledby="PrescriptionModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="patientModalLabel">Add Patient</h5>
+                    <h5 class="modal-title" id="PrescriptionModalLabel">Add Prescription</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="patient-form">
+                    <form id="Prescription-form">
+                        <div class="form-group">
+                            <label for="prescription_id">Prescription ID</label>
+                            <input type="number" class="form-control" id="prescription_id" name="prescription_id" disabled>
+                        </div>
                         <div class="form-group">
                             <label for="patient_id">Patient ID</label>
-                            <input type="number" class="form-control" id="patient_id" name="patient_id" disabled>
+                            <input type="number" class="form-control" id="patient_id" name="patient_id" required>
                         </div>
                         <div class="form-group">
-                            <label for="medical_record_no">Medical Record No</label>
-                            <input type="text" class="form-control" id="medical_record_no" name="medical_record_no" maxlength="6" required>
+                            <label for="staff_id">Staff ID</label>
+                            <input type="number" class="form-control" id="staff_id" name="staff_id" required>
                         </div>
                         <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" required>
+                            <label for="issue_date">Issue Date</label>
+                            <input type="date" class="form-control" id="issue_date" name="issue_date" required>
                         </div>
                         <div class="form-group">
-                            <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control" id="middle_name" name="middle_name" maxlength="50">
+                            <label for="medication">Medication</label>
+                            <textarea class="form-control" id="medication" name="medication" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" maxlength="50" required>
+                            <label for="dosage">Dosage</label>
+                            <input type="text" class="form-control" id="dosage" name="dosage" required>
                         </div>
                         <div class="form-group">
-                            <label for="user_name">User Name</label>
-                            <input type="text" class="form-control" id="user_name" name="user_name" maxlength="1000" required>
+                            <label for="frequency">Frequency</label>
+                            <input type="text" class="form-control" id="frequency" name="frequency" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="text" class="form-control" id="password" name="password" maxlength="1000" required>
-
+                            <label for="duration">Duration</label>
+                            <input type="text" class="form-control" id="duration" name="duration" required>
                         </div>
                         <div class="form-group">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob" name="dob" required>
+                            <label for="created_at_timestamp">Timestamp</label>
+                            <input type="datetime-local" class="form-control" id="created_at_timestamp" name="created_at_timestamp" disabled>
                         </div>
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select class="form-control" id="gender" name="gender" required>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-                    <button type="button" class="btn btn-primary" id="save-patient-btn">Save</button>
+                    <button type="button" class="btn btn-primary" id="save-prescription-btn">Save</button>
                 </div>
-
-
             </div>
         </div>
     </div>
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -271,152 +263,161 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/plugins/jquery/scrollbar/jquery.scrollbar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/js/custom/patient-info.js"></script>
+<script src="/js/custom/prescription-info.js"></script>
 
 <script>
-    window.TrackJS &&
-    TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "argon-dashboard-free"
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchPrescriptionRecords();
     });
+
+    // Fetch existing prescriptions and display them
+    function fetchPrescriptionRecords() {
+        fetch('/prescriptions')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error fetching prescriptions: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tableBody = document.getElementById('prescription-table-body');
+                tableBody.innerHTML = ''; // Clear table
+                data.forEach(prescription => {
+                    const row = `
+                    <tr>
+                        <td>${prescription.prescriptionId || ''}</td>
+                        <td>${prescription.patientId || ''}</td>
+                        <td>${prescription.staffId || ''}</td>
+                        <td>${prescription.issueDate || ''}</td>
+                        <td>${prescription.medication || ''}</td>
+                        <td>${prescription.dosage || ''}</td>
+                        <td>${prescription.frequency || ''}</td>
+                        <td>${prescription.duration || ''}</td>
+                        <td>${prescription.createdAtTimestamp || ''}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" onclick="editPrescription(${prescription.prescriptionId})">Edit</button>
+                             <button class="btn btn-sm btn-danger" onclick="deletePrescription(${prescription.prescriptionId})">Delete</button>
+                        </td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching prescription records:', err);
+                alert('Failed to fetch prescription records.');
+            });
+    }
+
+    // Open the modal to add a new prescription
+    function openAddPrescriptionModal() {
+        document.getElementById('Prescription-form').reset();
+        document.getElementById('PrescriptionModalLabel').innerText = 'Add Prescription';
+        document.getElementById('save-prescription-btn').onclick = savePrescription;
+        $('#PrescriptionModal').modal('show');
+    }
+
+    // Add a new prescription
+    function savePrescription() {
+        const prescription = {
+            patientId: document.getElementById("patient_id").value,
+            staffId: document.getElementById("staff_id").value,
+            issueDate: document.getElementById("issue_date").value,
+            medication: document.getElementById("medication").value,
+            dosage: document.getElementById("dosage").value,
+            frequency: document.getElementById("frequency").value,
+            duration: document.getElementById("duration").value,
+        };
+
+        fetch('/prescriptions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(prescription),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error adding prescription: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(() => {
+                $('#PrescriptionModal').modal('hide');
+                fetchPrescriptionRecords();
+                alert('Prescription added successfully!');
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Failed to add prescription.');
+            });
+    }
+
+    // Edit existing prescription
+    function editPrescription(prescriptionId) {
+        fetch(`/prescriptions/${prescriptionId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error fetching prescription with ID ${prescriptionId}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(prescription => {
+                document.getElementById("prescription_id").value = prescription.prescriptionId;
+                document.getElementById("patient_id").value = prescription.patientId;
+                document.getElementById("staff_id").value = prescription.staffId;
+                document.getElementById("issue_date").value = prescription.issueDate;
+                document.getElementById("medication").value = prescription.medication;
+                document.getElementById("dosage").value = prescription.dosage;
+                document.getElementById("frequency").value = prescription.frequency;
+                document.getElementById("duration").value = prescription.duration;
+
+                // Set modal title and save function for editing
+                document.getElementById("PrescriptionModalLabel").innerText = "Edit Prescription";
+                document.getElementById("save-prescription-btn").onclick = function () {
+                    updatePrescription(prescriptionId);
+                };
+
+                $("#PrescriptionModal").modal("show");
+            })
+            .catch(err => {
+                console.error("Error editing prescription:", err);
+                alert("Failed to fetch prescription details for editing.");
+            });
+    }
+
+    function deletePrescription(prescriptionId) {
+        // Confirm if the user wants to delete the prescription
+        if (confirm('Are you sure you want to delete this prescription?')) {
+            fetch(`/prescriptions/${prescriptionId}`, {
+                method: 'DELETE', // HTTP DELETE method
+            })
+                .then(response => {
+                    if (response.ok) {  // Check if the response status code is 2xx (successful)
+                        alert('Prescription deleted successfully!');
+                        fetchPrescriptionRecords();  // Refresh the table to remove the deleted prescription
+                    } else {
+                        throw new Error('Failed to delete prescription');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error deleting prescription:', err);
+                    alert('Failed to delete prescription.');
+                });
+        }
+    }
+
+
+
+
+    function closeModal() {
+        $('#PrescriptionModal').modal('hide');
+    }
+
+
 </script>
-
-<!-- Custom JS -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        fetchPatientRecords();
-    });
-
-        // Fetch existing patients and display them
-        function fetchPatientRecords() {
-            fetch('/api/patient-info')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error fetching patients: ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const tableBody = document.getElementById('patient-table-body');
-                    tableBody.innerHTML = ''; // Clear table
-                    data.forEach(patient => {
-                        const row = `
-                <tr>
-                    <td>${patient.patientId || ''}</td> <!-- Patient ID -->
-                    <td>${patient.medicalRecordNo || ''}</td> <!-- Medical Record No -->
-                    <td>${patient.firstName || ''}</td> <!-- First Name -->
-                    <td>${patient.middleName || ''}</td> <!-- Middle Name -->
-                    <td>${patient.lastName || ''}</td> <!-- Last Name -->
-                    <td>${patient.userId || ''}</td> <!-- User Name -->
-                    <td>${patient.password || ''}</td> <!-- Masked Password -->
-                    <td>${patient.dob || ''}</td> <!-- DOB -->
-                    <td>${patient.gender || ''}</td> <!-- Gender -->
-
-                    <td>
-                        <button class="btn btn-sm btn-warning" onclick="editPatient(${patient.patientId})">Edit</button>
-
-                    </td>
-                </tr>`;
-                        tableBody.innerHTML += row;
-                    });
-                })
-                .catch(err => {
-                    console.error('Error fetching patient records:', err);
-                    alert('Failed to fetch patient records.');
-                });
-        }
-
-
-
-
-        // Open the modal to add a new patient
-        function openAddPatientModal() {
-        document.getElementById('patient-form').reset();
-        document.getElementById('patientModalLabel').innerText = 'Add Patient';
-        document.getElementById('save-patient-btn').onclick = savePatient;
-        $('#patientModal').modal('show');
-    }
-
-        // Add a new patient
-        function savePatient() {
-        const patient = {
-            medicalRecordNo: document.getElementById("medical_record_no").value,
-            firstName: document.getElementById("first_name").value,
-            middleName: document.getElementById("middle_name").value,
-            lastName: document.getElementById("last_name").value,
-            userId: document.getElementById("user_name").value,
-            password: document.getElementById("password").value,
-            dob: document.getElementById("dob").value, // Collect Date of Birth
-            gender: document.getElementById("gender").value // Collect Gender
-    };
-
-        fetch('/api/patient-info', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-    },
-        body: JSON.stringify(patient),
-    })
-        .then(response => {
-        if (!response.ok) {
-        throw new Error(`Error adding patient: ${response.statusText}`);
-    }
-        return response.json();
-    })
-        .then(() => {
-        $('#patientModal').modal('hide');
-        fetchPatientRecords();
-        alert('Patient added successfully!');
-    })
-        .catch(err => {
-        console.error(err);
-        alert('Failed to add patient.');
-    });
-    }
-
-        function editPatient(patientId) {
-            fetch(`/api/patient-info/${patientId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error fetching patient with ID ${patientId}: ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(patient => {
-                    document.getElementById("patient_id").value = patient.patientId;
-                    document.getElementById("medical_record_no").value = patient.medicalRecordNo;
-                    document.getElementById("first_name").value = patient.firstName;
-                    document.getElementById("middle_name").value = patient.middleName || "";
-                    document.getElementById("last_name").value = patient.lastName;
-                    document.getElementById("user_name").value = patient.userId;
-                    document.getElementById("password").value = patient.password;
-                    document.getElementById("dob").value = patient.dob;
-                    document.getElementById("gender").value = patient.gender;
-
-                    // Set modal title and save function for editing
-                    document.getElementById("patientModalLabel").innerText = "Edit Patient";
-                    document.getElementById("save-patient-btn").onclick = function () {
-                        updatePatient(patientId);
-                    };
-
-                    $("#patientModal").modal("show");
-                })
-                .catch(err => {
-                    console.error("Error editing patient:", err);
-                    alert("Failed to fetch patient details for editing.");
-                });
-            // Add your logic for editing a patient
-        }
-
-        function closeModal() {
-            $('#patientModal').modal('hide');
-        }
-
-
-
-    </script>
 
 </body>
 
 </html>
+
+
