@@ -383,20 +383,16 @@
   </div>
 </div>
 <!--   Core   -->
+<!-- Required JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Argon Dashboard JS -->
 <script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
 
-<script src="/path-to-assets/js/plugins/jquery/dist/jquery.min.js"></script>
-<script src="/path-to-assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<script src="/js/plugins/jquery/dist/jquery.min.js"></script>
-<script src="/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Optional JS -->
-<!-- Argon JS -->
-<script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
 <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+
 <script>
   window.TrackJS &&
   TrackJS.install({
@@ -413,6 +409,7 @@
               const tableBody = document.getElementById('insurance-table-body');
               tableBody.innerHTML = '';
               data.forEach(record => {
+                console.log(record);
                 const row = `<tr>
                     <td>${record.insuranceNumber}</td>
                     <td>${record.insuranceProvider}</td>
