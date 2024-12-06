@@ -225,10 +225,15 @@
             if (response.ok) {
                 // Redirect on success (change '/dashboard' to your desired page)
                 // window.location.href = "/dashboard";
-                const redirectUrl = await response.text();
-                window.location.href = redirectUrl;
+                // const redirectUrl = await response.text();
+                // window.location.href = redirectUrl;
+                const data = await response.json();
+                localStorage.setItem("token", data.token);
+                window.location.href = data.redirectUrl;
             } else {
                 // Display error message
+                // const errorText = await response.text();
+                // document.getElementById("errorMessage").innerText = errorText;
                 const errorText = await response.text();
                 document.getElementById("errorMessage").innerText = errorText;
             }
