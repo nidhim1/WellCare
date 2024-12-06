@@ -2,6 +2,7 @@ package edu.neu.csye6200.model;
 
 public class PatientInfoDTO {
 
+    private int patientId; // Include patientId for fetching
     private String firstName;
     private String middleName;
     private String lastName;
@@ -10,6 +11,14 @@ public class PatientInfoDTO {
     private String userId;
     private String password;
     private String medicalRecordNo;
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
 
     // Getter and Setter methods for firstName
     public String getFirstName() {
