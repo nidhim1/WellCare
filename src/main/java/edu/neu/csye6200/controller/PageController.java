@@ -16,4 +16,9 @@ public class PageController {
 public String showInsurancePage() {
     return "insurance";
 }
+@GetMapping("/patient-profile")
+    public String showPatientProfilePage() {
+        return "patient-profile";
+}
+
 }
