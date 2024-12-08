@@ -26,4 +26,14 @@ public class LoginServiceImpl implements LoginService {
         Optional<Staff> staff = loginRespository.findStaffByUsernameAndPassword(userName, password);
         return staff.isPresent();
     }
+
+    @Override
+    public Staff getAuthenticatedStaff(String userName, String password) {
+        return loginRespository.findStaffByUsernameAndPassword(userName, password).orElse(null);
+    }
+
+    @Override
+    public Patient getAuthenticatedPatient(String userName, String password) {
+        return loginRespository.findPatientByUsernameAndPassword(userName, password).orElse(null);
+    }
 }
