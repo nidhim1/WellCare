@@ -12,6 +12,8 @@ public class StaffDTO {
     private String email;
     private boolean availability;
     private String specialization;
+    private String username;
+    private String password;
 
     public int getStaffId() {
         return staffId;
@@ -53,6 +55,15 @@ public class StaffDTO {
         return specialization;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+
     public void setStaffId(int staffId) {
         this.staffId = staffId;
     }
@@ -91,5 +102,13 @@ public class StaffDTO {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

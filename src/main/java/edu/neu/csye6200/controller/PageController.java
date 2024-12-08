@@ -19,10 +19,26 @@ public class PageController {
         return "insurance";
     }
 
-    @GetMapping("/patient-profile")
-        public String showPatientProfilePage() {
-        return "patient-profile";
+@GetMapping("/patient-profile")
+    public String showPatientProfilePage() {return "patient-profile";}
+
+    @GetMapping("/appointment")
+    public String showAppointmentPage() { return "appointment"; }
+
+    @GetMapping("/scheduleappointment")
+    public String showScheduleAppointmentPage() { return "scheduleappointment"; }
+
+    @GetMapping("/staffappointment")
+    public String showStaffAppointmentPage() { return "staffappointment"; }
+
+    @GetMapping("/doctor-profile")
+    public String showDoctorProfilePage() {
+        return "doctor-profile";
     }
 
+    @GetMapping("/staff-appointments")
+    public String showStaffAllAppointmentsPage() {
+        return "staff-all-appointments";
+    }
 
 }
