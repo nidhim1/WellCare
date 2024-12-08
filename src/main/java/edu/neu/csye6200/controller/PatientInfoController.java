@@ -40,4 +40,6 @@ public class PatientInfoController {
         List<PatientInfoDTO> patients = patientInfo.getAllPatients();
         return ResponseEntity.ok(patients);
     }
+
+
 }
