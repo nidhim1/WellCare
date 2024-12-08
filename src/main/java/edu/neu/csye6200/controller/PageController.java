@@ -16,4 +16,14 @@ public class PageController {
 public String showInsurancePage() {
     return "insurance";
 }
+
+    @GetMapping("/doctor-profile")
+    public String showDoctorProfilePage() {
+        return "doctor-profile";
+    }
+
+    @GetMapping("/staff-appointments")
+    public String showStaffAllAppointmentsPage() {
+        return "staff-all-appointments";
+    }
 }

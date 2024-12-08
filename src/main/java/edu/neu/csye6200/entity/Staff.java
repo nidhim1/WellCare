@@ -105,6 +105,14 @@ public class Staff {
         this.staffId = staffId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -147,5 +155,13 @@ public class Staff {
 
     public void setRegisterTimestamp(Date registerTimestamp) {
         this.registerTimestamp = registerTimestamp;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
