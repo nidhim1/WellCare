@@ -3,6 +3,8 @@ package edu.neu.csye6200.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+
 @Controller
 public class PageController {
 
@@ -12,13 +14,15 @@ public class PageController {
     }
 
 
-@GetMapping("/insurance")
-public String showInsurancePage() {
-    return "insurance";
-}
-@GetMapping("/patient-profile")
-    public String showPatientProfilePage() {
+    @GetMapping("/insurance")
+    public String showInsurancePage() {
+        return "insurance";
+    }
+
+    @GetMapping("/patient-profile")
+        public String showPatientProfilePage() {
         return "patient-profile";
-}
+    }
+
 
 }

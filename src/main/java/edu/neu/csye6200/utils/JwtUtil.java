@@ -4,18 +4,36 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final SecretKey secretKey;
+//    private final SecretKey secretKey;
 
-    public JwtUtil() {
-        this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//    public JwtUtil() {
+//        this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//    }
+
+//    public JwtUtil(@Value("${jwt.secret}") String secret) {
+//        this.secretKey = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS256.getJcaName());
+//    }
+
+    @Value("${jwt.secret}")
+    private String secret;
+
+    private SecretKey secretKey;
+
+    @PostConstruct
+    public void init() {
+        this.secretKey = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS256.getJcaName());
+        System.out.println("JWT Secret: " + secret); // Debug: Check if the secret is loaded
     }
 
     // Generate JWT Token
