@@ -13,23 +13,41 @@ public class PageController {
 
     @GetMapping("/insurance")
     public String showInsurancePage() {
-    return "insurance";
-}
-<<<<<<< HEAD
-@GetMapping("/patient-profile")
+        return "insurance";
+    }
+
+    ///<<<<<<< HEAD
+    @GetMapping("/patient-profile")
     public String showPatientProfilePage() {
         return "patient-profile";
-}
+    }
 
-=======
+//=======
 
     @GetMapping("/appointment")
-    public String showAppointmentPage() { return "appointment"; }
+    public String showAppointmentPage() {
+        return "appointment";
+    }
 
     @GetMapping("/scheduleappointment")
-    public String showScheduleAppointmentPage() { return "scheduleappointment"; }
+    public String showScheduleAppointmentPage() {
+        return "scheduleappointment";
+    }
 
     @GetMapping("/staffappointment")
-    public String showStaffAppointmentPage() { return "staffappointment"; }
->>>>>>> 0664128 (Made UI for Patient Appointment, Patient Schedule Appointment and Staff Appointment)
+    public String showStaffAppointmentPage() {
+        return "staffappointment";
+    }
+//>>>>>>> 0664128 (Made UI for Patient Appointment, Patient Schedule Appointment and Staff Appointment)
+
+    // Prescription Management Page
+    @GetMapping("/prescriptions-management")
+    public String showPrescriptionManagementPage() {
+        return "prescriptions";
+    }
+
+    @GetMapping("/patient-info")
+    public String showPatientInfoPage() {
+        return "patient-info"; // Map to patient-info.html
+    }
 }
