@@ -15,13 +15,9 @@ public class PageController {
     public String showInsurancePage() {
     return "insurance";
 }
-<<<<<<< HEAD
-@GetMapping("/patient-profile")
-    public String showPatientProfilePage() {
-        return "patient-profile";
-}
 
-=======
+@GetMapping("/patient-profile")
+    public String showPatientProfilePage() {return "patient-profile";}
 
     @GetMapping("/appointment")
     public String showAppointmentPage() { return "appointment"; }
@@ -31,5 +27,4 @@ public class PageController {
 
     @GetMapping("/staffappointment")
     public String showStaffAppointmentPage() { return "staffappointment"; }
->>>>>>> 0664128 (Made UI for Patient Appointment, Patient Schedule Appointment and Staff Appointment)
 }
