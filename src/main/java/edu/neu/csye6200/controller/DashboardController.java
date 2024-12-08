@@ -15,4 +15,9 @@ public class DashboardController {
     public String staffDashboard() {
         return "staff-dashboard";
     }
+
+    @GetMapping("/doctor-dashboard")
+    public String doctorDashboard() {
+        return "doctor-dashboard";
+    }
 }

@@ -85,6 +85,7 @@ public class PatientInfoImpl implements PatientInfo {
 
     private PatientInfoDTO mapEntityToDTO(Patient entity) {
         PatientInfoDTO dto = new PatientInfoDTO();
+        dto.setPatientId(entity.getPatientId());
         dto.setFirstName(entity.getFirstName());
         dto.setMiddleName(entity.getMiddleName());
         dto.setLastName(entity.getLastName());
