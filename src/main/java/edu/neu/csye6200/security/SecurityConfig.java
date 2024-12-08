@@ -30,6 +30,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.securityMatcher("/api/v1/**")
                 .authorizeRequests()
+                .requestMatchers("/css/**", "/js/**", "/img/**",  "/static/**").permitAll()
+
                 .requestMatchers("api/v1/login").permitAll()
                 .requestMatchers("patient-dashboard").hasRole("PATIENT")
                 .requestMatchers("staff-dashboard").hasRole("STAFF")

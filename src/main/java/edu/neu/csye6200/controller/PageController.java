@@ -11,9 +11,25 @@ public class PageController {
         return "login";
     }
 
-
-@GetMapping("/insurance")
-public String showInsurancePage() {
+    @GetMapping("/insurance")
+    public String showInsurancePage() {
     return "insurance";
 }
+<<<<<<< HEAD
+@GetMapping("/patient-profile")
+    public String showPatientProfilePage() {
+        return "patient-profile";
+}
+
+=======
+
+    @GetMapping("/appointment")
+    public String showAppointmentPage() { return "appointment"; }
+
+    @GetMapping("/scheduleappointment")
+    public String showScheduleAppointmentPage() { return "scheduleappointment"; }
+
+    @GetMapping("/staffappointment")
+    public String showStaffAppointmentPage() { return "staffappointment"; }
+>>>>>>> 0664128 (Made UI for Patient Appointment, Patient Schedule Appointment and Staff Appointment)
 }
