@@ -41,4 +41,9 @@ public class PageController {
         return "staff-all-appointments";
     }
 
+    @GetMapping("/medical-history")
+    public String showMedicalHistoryPage() {
+        return "medical-history";
+    }
+
 }
