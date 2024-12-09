@@ -1,156 +1,8 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <title>Schedule Appointment</title>-->
-<!--  <style>-->
-<!--    body {-->
-<!--      background-color: #f8f9fe;-->
-<!--      font-family: Arial, sans-serif;-->
-<!--      display: flex;-->
-<!--      margin: 0;-->
-<!--    }-->
-<!--    .side-nav {-->
-<!--      height: 100vh;-->
-<!--      background-color: #5e72e4;-->
-<!--      color: white;-->
-<!--      position: fixed;-->
-<!--      width: 240px;-->
-<!--      padding-top: 20px;-->
-<!--    }-->
-<!--    .side-nav h4 {-->
-<!--      text-align: center;-->
-<!--      color: white;-->
-<!--      margin-bottom: 20px;-->
-<!--    }-->
-<!--    .side-nav a {-->
-<!--      color: white;-->
-<!--      text-decoration: none;-->
-<!--      display: block;-->
-<!--      padding: 15px 20px;-->
-<!--      border-radius: 0.375rem;-->
-<!--      margin: 10px 0;-->
-<!--    }-->
-<!--    .side-nav a:hover {-->
-<!--      background-color: #324cdd;-->
-<!--    }-->
-<!--    .content {-->
-<!--      margin-left: 260px;-->
-<!--      padding: 20px;-->
-<!--      width: 100%;-->
-<!--    }-->
-<!--    h1 {-->
-<!--      color: #5e72e4;-->
-<!--      margin-bottom: 20px;-->
-<!--    }-->
-<!--    form {-->
-<!--      background-color: white;-->
-<!--      padding: 20px;-->
-<!--      border-radius: 10px;-->
-<!--      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);-->
-<!--    }-->
-<!--    label {-->
-<!--      display: block;-->
-<!--      margin-bottom: 10px;-->
-<!--      font-weight: bold;-->
-<!--    }-->
-<!--    input, select {-->
-<!--      width: 100%;-->
-<!--      padding: 10px;-->
-<!--      margin-bottom: 20px;-->
-<!--      border: 1px solid #ccc;-->
-<!--      border-radius: 5px;-->
-<!--    }-->
-<!--    button {-->
-<!--      background-color: #5e72e4;-->
-<!--      color: white;-->
-<!--      border: none;-->
-<!--      padding: 10px 20px;-->
-<!--      border-radius: 5px;-->
-<!--      cursor: pointer;-->
-<!--      margin-right: 10px;-->
-<!--    }-->
-<!--    button:hover {-->
-<!--      background-color: #324cdd;-->
-<!--    }-->
-<!--  </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--&lt;!&ndash; Side Navigation Bar &ndash;&gt;-->
-<!--<div class="side-nav">-->
-<!--  <h4>Appointment App</h4>-->
-<!--  <a href="/profile">My Profile</a>-->
-<!--  <a href="/scheduleappointment">Schedule Appointment</a>-->
-<!--  <a href="/prescriptions">Prescriptions</a>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; Main Content &ndash;&gt;-->
-<!--<div class="content">-->
-<!--  <h1>Schedule Appointment</h1>-->
-<!--  <form id="scheduleAppointmentForm">-->
-<!--    <label for="patientId">Patient ID</label>-->
-<!--    <input type="number" id="patientId" required>-->
-
-<!--    <label for="staffId">Staff ID</label>-->
-<!--    <input type="number" id="staffId" required>-->
-
-<!--    <label for="appointmentDate">Date and Time</label>-->
-<!--    <input type="datetime-local" id="appointmentDate" required>-->
-
-<!--    <label for="reason">Reason</label>-->
-<!--    <input type="text" id="reason" required>-->
-
-<!--    <label for="appointmentType">Appointment Type</label>-->
-<!--    <input type="text" id="appointmentType" required>-->
-
-<!--    <button type="submit">Create Appointment</button>-->
-<!--    <button type="button" onclick="viewAppointments()">View Appointment</button>-->
-<!--  </form>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--  const baseUrl = "http://localhost:8080/appointments"; // Replace with your backend URL-->
-
-<!--  // Function to handle appointment creation-->
-<!--  document.getElementById('scheduleAppointmentForm').addEventListener('submit', function (e) {-->
-<!--    e.preventDefault();-->
-
-<!--    const appointment = {-->
-<!--      patientId: document.getElementById('patientId').value,-->
-<!--      staffId: document.getElementById('staffId').value,-->
-<!--      appointmentDate: document.getElementById('appointmentDate').value,-->
-<!--      reason: document.getElementById('reason').value,-->
-<!--      appointmentType: document.getElementById('appointmentType').value-->
-<!--    };-->
-
-<!--    fetch(baseUrl, {-->
-<!--      method: 'POST',-->
-<!--      headers: { 'Content-Type': 'application/json' },-->
-<!--      body: JSON.stringify(appointment)-->
-<!--    })-->
-<!--            .then(response => response.json())-->
-<!--            .then(data => {-->
-<!--              alert('Appointment scheduled successfully!');-->
-<!--              document.getElementById('scheduleAppointmentForm').reset();-->
-<!--            })-->
-<!--            .catch(error => console.error('Error scheduling appointment:', error));-->
-<!--  });-->
-
-<!--  // Function to view the list of appointments (navigate to the appointments page)-->
-<!--  function viewAppointments() {-->
-<!--    window.location.href = "/appointment"; // Assuming this URL displays the list of appointments-->
-<!--  }-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <script src="/js/common.js"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
@@ -178,7 +30,6 @@
     <a class="navbar-brand pt-0" href="../index.html">
       <!--            <img src="/img/brand/blue.png" class="navbar-brand-img" alt="...">-->
     </a>
-    <!-- User -->
     <ul class="nav align-items-center d-md-none">
       <li class="nav-item dropdown">
         <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -408,35 +259,70 @@
             </div>
           </div>
           <div class="card-body">
-            <form>
+            <form id="scheduleAppointmentForm">
               <div class="pl-lg-4">
                   <div>
                     <div class="form-group">
-                      <label class="form-control-label" for="input-doctor-name">Doctor Name</label>
-                      <input type="text" id="input-doctor-name" class="form-control form-control-alternative" placeholder="Doctor Name">
+                      <label class="form-control-label" for="input-patient-ID">Patient ID</label>
+                      <input type="text" id="input-patient-ID" class="form-control form-control-alternative" placeholder="Patient ID">
                     </div>
                   </div>
                   <div>
                     <div class="form-group">
-                      <label class="form-control-label" for="input-date">Date</label>
-                      <input type="date" id="input-date" class="form-control form-control-alternative" placeholder="">
+                      <label class="form-control-label" for="staff-ID">Select Doctor</label>
+                      <select id="staff-ID" class="form-control form-control-alternative" onchange="handlestaffID()">
+                        <option value="" disabled selected>Select a Doctor</option>
+                        <option value="101">Dr. Smith</option>
+                        <option value="102">Dr. Johnson</option>
+                        <option value="103">Dr. Williams</option>
+                        <option value="104">Dr. Brown</option>
+                      </select>
                     </div>
                   </div>
                   <div>
                     <div class="form-group">
-                      <label class="form-control-label" for="input-time">Time</label>
-                      <input type="text" id="input-time" class="form-control form-control-alternative" placeholder="">
+                      <label class="form-control-label" for="input-appointment-date">Appointment Date</label>
+                      <input type="date" id="input-appointment-date" class="form-control form-control-alternative" placeholder="Select a date">
                     </div>
                   </div>
+                  <div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-time-from">Time From</label>
+                      <input type="text" id="input-time-from" class="form-control form-control-alternative" placeholder="11:00 AM">
+                    </div>
+                  </div>
+                  <div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-time-to">Time To</label>
+                      <input type="text" id="input-time-to" class="form-control form-control-alternative" placeholder="12:00 PM">
+                    </div>
+                  </div>
+                  <div>
                   <div>
                     <div class="form-group">
                       <label class="form-control-label" for="input-reason">Reason</label>
                       <textarea id="input-reason" class="form-control form-control-alternative" placeholder="Reason"></textarea>
                     </div>
-                  <div class="row">
-                    <a href="#!" class="btn btn-info">Confirm</a>
-                  </div>
+                  <div>
+                  <div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-appointment-type">Appointment Type</label>
+                      <select id="input-appointment-type" class="form-control form-control-alternative" onchange="handleAppointmentType()">
+                        <option value="" disabled selected>Appointment Type</option>
+                        <option value="routine">Routine Check-up</option>
+                        <option value="followUp">Follow Up Appointment</option>
+                        <option value="consultation">Consultation</option>
+                        <option value="diagnostic">Diagnostic Testing</option>
+                      </select>
+                    </div>
+                    </div>
+                    <div>
+                      <button type="submit" class="btn btn-primary">Create Appointment</button>
+                      <button type="button" class="btn btn-primary" onclick="viewAppointments()">View Appointment</button>
+                    </div >
                 </div>
+              </div>
+              </div>
               </div>
             </form>
           </div>
@@ -448,32 +334,14 @@
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Well Care</a>
           </div>
-        </div>
-        <div class="col-xl-6">
-          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-            <li class="nav-item">
-              <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-            </li>
-            <li class="nav-item">
-              <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
-            </li>
-          </ul>
         </div>
       </div>
     </footer>
   </div>
 </div>
 <!--   Core   -->
-<script src="/js/plugins/jquery/dist/jquery.min.js"></script>
-<script src="/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!--   Optional JS   -->
 <!--   Argon JS   -->
 <script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
@@ -484,6 +352,80 @@
     token: "ee6fab19c5a04ac1a32a645abde4613a",
     application: "argon-dashboard-free"
   });
+</script>
+<script>
+  const baseUrl = "http://localhost:8080/appointments"; // Replace with your backend URL
+
+  //to ensure deselected value doesnt gives any validation error
+  // document.getElementById('input-appointment-type').selectedIndex = 0;
+
+  // Function to handle appointment creation
+  document.getElementById('scheduleAppointmentForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const appointmentDate = document.getElementById('input-appointment-date').value;
+    // const formattedDateTime = `${appointmentDate}T00:00:00`;
+
+    const appointment = {
+      patientId: document.getElementById('input-patient-ID').value,
+      staffId: document.getElementById('staff-ID').value,
+      appointmentDate: appointmentDate,
+      timeFrom:document.getElementById('input-time-from').value,
+      timeTo:document.getElementById('input-time-to').value,
+      reason: document.getElementById('input-reason').value,
+      appointmentType: document.getElementById('input-appointment-type').value,
+      status: "Pending"
+    };
+
+    console.log(appointment);
+
+    if (!appointmentDate) {
+      alert("Please select a valid appointment date.");
+      return;
+    }
+
+    fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(appointment)
+    })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Failed to schedule appointment');
+              }
+              return response.json();
+            })
+            .then(data => {
+              alert('Appointment scheduled successfully!');
+              document.getElementById('scheduleAppointmentForm').reset(); // Reset the form
+              console.log('Created Appointment:', data); // Log the response
+            })
+            .catch(error => {
+              console.error('Error scheduling appointment:', error);
+              alert('An error occurred while scheduling the appointment.');
+            });
+  });
+
+  function handlestaffID() {
+    const selectElement = document.getElementById('staff-ID');
+    const selectedstaffID = selectElement.value; // Get the selected staff ID
+    console.log(`Selected Doctor ID: ${selectedstaffID}`);
+
+  }
+
+  function handleAppointmentType() {
+    const selectElement = document.getElementById('input-appointment-type');
+    const selectedAppointmentType = selectElement.value; //Get selected appointment type
+    console.log(`Selected Appointment Type: ${selectedAppointmentType}`);
+  }
+
+  // Function to view the list of appointments (navigate to the appointments page)
+  function viewAppointments() {
+    window.location.href = "/appointment"; // Assuming this URL displays the list of appointments
+  }
 </script>
 </body>
 
