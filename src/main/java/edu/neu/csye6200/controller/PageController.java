@@ -41,4 +41,21 @@ public class PageController {
         return "staff-all-appointments";
     }
 
+    // Prescription Management Page
+    @GetMapping("/prescriptions-management")
+    public String showPrescriptionManagementPage() {
+        return "prescriptions";
+    }
+
+    @GetMapping("/patient-info")
+    public String showPatientInfoPage() {
+        return "patient-info"; // Map to patient-info.html
+    }
+
+    @GetMapping("/staff-profile")
+    public String staffProfilePage() {
+        return "staffprofile"; // Return the name of your HTML file without the .html extension
+    }
 }
+
+
