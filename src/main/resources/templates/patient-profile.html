@@ -218,8 +218,8 @@
       <div class="row">
         <div class="col-lg-7 col-md-10">
           <h1 class="userName display-2 text-white">Hello </h1>
-          <a href="#!" class="btn btn-info">Edit profile</a>
-          <a href="#!" id="save-link" class="btn btn-success" style="display: none;">Save</a>
+          <a href="#!" id="edit-link" class="btn btn-info">Edit Profile</a>
+<!--          <a href="#!" id="save-link" class="btn btn-success" style="display: none;">Save</a>-->
 
         </div>
       </div>
@@ -415,6 +415,8 @@
                       <label class="form-control-label" for="input-coverage-details">Coverage Details</label>
                       <textarea id="input-coverage-details" class="form-control form-control-alternative" rows="3" disabled></textarea>
                     </div>
+                    <a href="#!" id="save-link" class="btn btn-success" style="display: none;">Save</a>
+
                   </div>
                 </div>
               </div>
@@ -588,7 +590,7 @@
 
   // Fetch the first_name, middle_name, and last_name from the cookies
   const firstName = getCookie('first_name') || 'Guest';
- // const middleName = getCookie('middle_name') || '';
+ const middleName = getCookie('middle_name') || '';
   const lastName = getCookie('last_name') || '';
 
   // Format the full name
@@ -609,108 +611,145 @@
   });
 
 
-  // Utility function to toggle form fields' disabled state
-  function toggleEditableFields(enable) {
-    document.querySelectorAll('#profile-form input').forEach(input => {
-      input.disabled = !enable; // Enable or disable the field
+
+
+
+
+
+  // Utility function to toggle editability of fields
+  function toggleFieldsEditable(enable) {
+    const fields = document.querySelectorAll('input, textarea');
+    fields.forEach(field => {
+      field.disabled = !enable;
     });
   }
 
-  // Handle "Edit Profile" link click
-  document.getElementById('edit-link').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default link behavior
-
+  // Handle "Edit Profile" click
+  document.addEventListener('DOMContentLoaded', () => {
+    const editLink = document.getElementById('edit-link');
     const saveLink = document.getElementById('save-link');
-    const isEditing = !document.getElementById('first_name').disabled;
 
-    if (isEditing) {
-      // Exit editing mode
-      toggleEditableFields(false);
-      saveLink.style.display = 'none';
-      document.getElementById('edit-link').innerText = 'Edit Profile';
+    if (editLink) {
+      editLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default behavior
+        const isEditing = !document.getElementById('input-patient-id').disabled;
+
+        if (isEditing) {
+          // Cancel editing
+          toggleFieldsEditable(false);
+          saveLink.style.display = 'none'; // Hide the Save link
+          editLink.textContent = 'Edit Profile'; // Reset link text
+        } else {
+          // Enable editing
+          toggleFieldsEditable(true);
+          saveLink.style.display = 'inline-block'; // Show the Save link
+          editLink.textContent = 'Cancel Edit'; // Change link text
+        }
+      });
     } else {
-      // Enter editing mode
-      toggleEditableFields(true);
-      saveLink.style.display = 'inline-block';
-      document.getElementById('edit-link').innerText = 'Cancel Edit';
+      console.error('Edit link element not found in the DOM.');
+    }
+
+
+    if (saveLink) {
+      saveLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default behavior
+
+
+    const patientData = {
+      patientId: document.getElementById('input-patient-id').value,
+      firstName: document.getElementById('input-first-name').value,
+      // middleName: document.getElementById('input-middle-name').value,
+      lastName: document.getElementById('input-last-name').value,
+      userId: document.getElementById('input-user-name').value,
+      dob: document.getElementById('input-dob').value,
+      email: document.getElementById('input-email').value,
+    };
+
+    const insuranceData = {
+      insuranceNumber: document.getElementById('input-insurance-id').value,
+      insuranceProvider: document.getElementById('input-insurance-provider').value,
+      insuranceType: document.getElementById('input-insurance-type').value,
+      insuranceDate: document.getElementById('input-insurance-date').value,
+      coverageDetails: document.getElementById('input-coverage-details').value,
+    };
+
+    const contactData = {
+      city: document.getElementById('input-city').value,
+      state: document.getElementById('input-state').value,
+      postalCode: document.getElementById('input-postal-code').value,
+      country: document.getElementById('input-country').value,
+      phoneNumber: document.getElementById('input-phone-number').value,
+      email: document.getElementById('input-email').value,
+      address: document.getElementById('input-address').value,
+    };
+
+    // Save all fields to the server
+    Promise.all([
+      savePatientInfo(patientData),
+      // saveInsuranceInfo(patientData.patientId, insuranceData),
+      // saveContactInfo(patientData.patientId, contactData),
+    ])
+            .then(() => {
+              alert('Profile updated successfully!');
+              toggleFieldsEditable(false);
+              saveLink.style.display = 'none'; // Hide the Save link
+              editLink.textContent = 'Edit Profile'; // Reset the Edit link text
+            })
+            .catch(error => {
+              console.error('Error saving data:', error);
+              alert('Failed to save changes.');
+            });
+      });
+    } else {
+      console.error('Save link element not found in the DOM.');
     }
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // Handle "Edit Profile" click
-    const editLink = document.querySelector('.btn.btn-info');
-    const saveLink = document.getElementById('save-link');
-
-    const toggleFieldsEditable = (enable) => {
-      const fields = document.querySelectorAll('input, textarea'); // Adjusted selector to match your inputs
-      fields.forEach(field => field.disabled = !enable);
-    };
-
-    editLink.addEventListener('click', (event) => {
-      event.preventDefault(); // Prevent default link behavior
-      const isEditing = editLink.innerText === 'Cancel Edit';
-
-      if (isEditing) {
-        // Cancel edit
-        toggleFieldsEditable(false);
-        saveLink.style.display = 'none';
-        editLink.innerText = 'Edit Profile';
-      } else {
-        // Enable edit
-        toggleFieldsEditable(true);
-        saveLink.style.display = 'inline-block';
-        editLink.innerText = 'Cancel Edit';
+  function savePatientInfo(data) {
+    console.log(data);
+    return fetch(`/api/patient-info/${data.patientId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'Content-Type': 'application/json', // Ensure this header is included
+      },
+      body: JSON.stringify(data), // Convert the data object to a JSON string
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to save patient info: ${response.statusText}`);
       }
+      return response.json(); // Return the server's response as JSON
     });
+  }
 
-    saveLink.addEventListener('click', (event) => {
-      event.preventDefault(); // Prevent default link behavior
 
-      // Collect data from the form fields
-      const patientData = {
-        patientId: document.getElementById('input-patient-id').value,
-        firstName: document.getElementById('input-first-name').value,
-        lastName: document.getElementById('input-last-name').value,
-        userId: document.getElementById('input-user-name').value,
-        dob: document.getElementById('input-dob').value,
-      };
-
-      const contactData = {
-        city: document.getElementById('input-city').value,
-        state: document.getElementById('input-state').value,
-        postalCode: document.getElementById('input-postal-code').value,
-        country: document.getElementById('input-country').value,
-        phoneNumber: document.getElementById('input-phone-number').value,
-        email: document.getElementById('input-email').value,
-        address: document.getElementById('input-address').value,
-      };
-
-      const insuranceData = {
-        insuranceNumber: document.getElementById('input-insurance-id').value,
-        insuranceProvider: document.getElementById('input-insurance-provider').value,
-        insuranceType: document.getElementById('input-insurance-type').value,
-        insuranceDate: document.getElementById('input-insurance-date').value,
-        coverageDetails: document.getElementById('input-coverage-details').value,
-      };
-
-      // Save the updated data to the server
-      Promise.all([
-        savePatientInfo(patientData),
-        saveContactInfo(patientData.patientId, contactData),
-        saveInsuranceInfo(patientData.patientId, insuranceData),
-      ])
-              .then(() => {
-                alert('Profile updated successfully!');
-                toggleFieldsEditable(false);
-                saveLink.style.display = 'none';
-                editLink.innerText = 'Edit Profile';
-              })
-              .catch(error => {
-                console.error('Error saving data:', error);
-                alert('Failed to save changes.');
-              });
+  function saveInsuranceInfo(patientId, data) {
+    return fetch(`/api/v1/Insurance/${patientId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(response => {
+      if (!response.ok) throw new Error(`Failed to save insurance info: ${response.statusText}`);
     });
-  });
+  }
+
+  function saveContactInfo(patientId, data) {
+    return fetch(`/api/v1/patientcontactinfo/${patientId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(response => {
+      if (!response.ok) throw new Error(`Failed to save contact info: ${response.statusText}`);
+    });
+  }
+
 
 
 
