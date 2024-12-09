@@ -256,70 +256,22 @@
                         <h3 class="mb-0">Appointment Requests</h3>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush" id="appointments-table">
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col">Sr. No.</th>
-                                <th scope="col">Patient Name</th>
-                                <th scope="col">Doctor Name</th>
+                                <th scope="col">Patient ID</th>
+                                <th scope="col">Staff ID</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Time</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason</th>
-                                <th scope="col"></th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Action</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>John Doe</td>
-                                <td>Dr. Sarah Carter</td>
-                                <td>12-10-2024</td>
-                                <td>9:00 AM to 9:30 AM</td>
-                                <td>Pending</td>
-                                <td>Regular Checkup</td>
-                                <td><a href="#!" class="btn btn-info">Update Status</a></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Emily Davis</td>
-                                <td>Dr. Daniel Wilson</td>
-                                <td>12-10-2024</td>
-                                <td>9:00 AM to 9:30 AM</td>
-                                <td>Pending</td>
-                                <td>Follow Up Visit</td>
-                                <td><a href="#!" class="btn btn-info">Update Status</a></td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Michael Brown</td>
-                                <td>Dr. Priya Sharma</td>
-                                <td>12-10-2024</td>
-                                <td>1:00 PM to 1:30 PM</td>
-                                <td>Pending</td>
-                                <td>Bone Pain</td>
-                                <td><a href="#!" class="btn btn-info">Update Status</a></td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Sophia White</td>
-                                <td>Dr. Ahmed Khan</td>
-                                <td>12-10-2024</td>
-                                <td>3:00 PM to 3:30 PM</td>
-                                <td>Pending</td>
-                                <td>Skin Rash</td>
-                                <td><a href="#!" class="btn btn-info">Update Status</a></td>
-                            </tr>
-                            <tr>
-                                <td>5.</td>
-                                <td>Daniel Johnson</td>
-                                <td>Dr. Maria Lopez</td>
-                                <td>12-10-2024</td>
-                                <td>5:00 PM to 5:30 PM</td>
-                                <td>Pending</td>
-                                <td>Regular Checkup</td>
-                                <td><a href="#!" class="btn btn-info">Update Status</a></td>
-                            </tr>
+                            <tbody id="appointments-body">
+                            <!-- Dynamic Content -->
                             </tbody>
                         </table>
                     </div>
@@ -394,6 +346,55 @@
         application: "argon-dashboard-free"
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const apiUrl = '/appointments';
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Failed to fetch appointments');
+            }
+
+            const appointments = await response.json();
+            const tableBody = document.getElementById('appointments-body');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            // Filter appointments with status 'Pending'
+            const pendingAppointments = appointments.filter(appointment => appointment.status === 'Pending');
+
+            if (pendingAppointments.length === 0) {
+                const noDataRow = document.createElement('tr');
+                noDataRow.innerHTML = `
+                    <td colspan="9" class="text-center">No Pending Appointments</td>
+                `;
+                tableBody.appendChild(noDataRow);
+                return;
+            }
+
+            pendingAppointments.forEach((appointment, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${appointment.patientId}</td>
+                    <td>${appointment.staffId}</td>
+                    <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
+                    <td>${appointment.timeFrom} - ${appointment.timeTo}</td>
+                    <td>${appointment.status}</td>
+                    <td>${appointment.reason}</td>
+                    <td>${appointment.appointmentType}</td>
+                    <td><a href="#!" class="btn btn-info">Update Status</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error fetching appointments:', error);
+            alert('Failed to load appointments. Please try again later.');
+        }
+    });
+</script>
+
 </body>
 
 </html>
