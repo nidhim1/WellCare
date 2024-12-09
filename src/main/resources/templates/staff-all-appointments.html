@@ -260,8 +260,8 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col">Sr. No.</th>
-                                <th scope="col">Patient ID</th>
-                                <th scope="col">Staff ID</th>
+                                <th scope="col">Patient Name</th>
+                                <th scope="col">Doctor Name</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Time</th>
                                 <th scope="col">Status</th>
@@ -317,8 +317,8 @@
                     <div class="modal-body">
                         <form id="updateStatusForm">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" id="statusScheduled" value="Scheduled">
-                                <label class="form-check-label" for="statusScheduled">Scheduled</label>
+                                <input class="form-check-input" type="radio" name="status" id="statusScheduled" value="Confirmed">
+                                <label class="form-check-label" for="statusScheduled">Confirmed</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="status" id="statusCancelled" value="Cancelled">
@@ -442,12 +442,13 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${appointment.patientId}</td>
-                    <td>${appointment.staffId}</td>
+                    <td>${appointment.patientName}</td>
+                    <td>${appointment.staffName}</td>
                     <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
                     <td>${appointment.timeFrom} - ${appointment.timeTo}</td>
                     <td>${appointment.status}</td>
                     <td>${appointment.reason}</td>
+                    <td>${appointment.appointmentType}</td>
                     <td>
                         <button class="btn btn-info update-status-btn" data-appointment-id="${appointment.appointmentId}">
                             Update Status
