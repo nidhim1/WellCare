@@ -392,6 +392,73 @@
     });
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        // Function to get a specific cookie value by its name
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Get the patientId from the cookie
+        const patientId = getCookie("patientId");
+        if (!patientId) {
+            console.error("Patient ID not found in cookies.");
+            return;
+        }
+
+        // API endpoint
+        const apiUrl = `/api/medicalhistory/medical-history/${patientId}`;
+
+        try {
+            // Fetch medical history records
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch medical history");
+            }
+
+            const medicalHistories = await response.json();
+
+            // Select the container where the medical history will be displayed
+            const profileContainer = document.querySelector(".card-profile .text-center");
+
+            // If no medical history records are found
+            if (medicalHistories.length === 0) {
+                profileContainer.innerHTML = `<h3>No medical history records found.</h3>`;
+                return;
+            }
+
+            // Dynamically generate and display the medical history records
+            profileContainer.innerHTML = medicalHistories
+                .map(
+                    (history) => `
+                <div class="medical-history-entry">
+                    <h4>History ID: ${history.historyId}</h4>
+                    <p><strong>Allergies:</strong> ${history.allergies || "None"}</p>
+                    <p><strong>Past Diseases:</strong> ${history.pastDiseases || "None"}</p>
+                    <p><strong>Ongoing Medication:</strong> ${history.ongoingMedication || "None"}</p>
+                    <p><strong>Allergy Type:</strong> ${history.allergyType || "N/A"}</p>
+                    <p><strong>Severity of Allergy:</strong> ${history.severityOfAllergy || "N/A"}</p>
+                    <p><strong>Doctor Notes:</strong> ${history.doctorNotes || "None"}</p>
+                    <p><strong>Patient Notes:</strong> ${history.patientNotes || "None"}</p>
+                    <p><strong>History Status:</strong> ${history.historyStatus || "N/A"}</p>
+                    <p><strong>Medication Changes:</strong> ${history.medicationChanges || "None"}</p>
+                    <hr>
+                </div>
+            `
+                )
+                .join("");
+        } catch (error) {
+            console.error("Error fetching medical history:", error);
+            const profileContainer = document.querySelector(".card-profile .text-center");
+            profileContainer.innerHTML = `<h3>Error loading medical history.</h3>`;
+        }
+    });
+
+</script>
+
 </body>
 
 </html>

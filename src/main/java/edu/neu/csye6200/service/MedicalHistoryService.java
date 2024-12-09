@@ -10,5 +10,5 @@ public interface MedicalHistoryService {
     MedicalHistoryDTO getMedicalHistoryById(Long id);
     MedicalHistoryDTO updateMedicalHistory(Long id, MedicalHistoryDTO patientMedicalHistoryDTO);
     void deleteMedicalHistory(Long id);
-    MedicalHistoryDTO getMedicalHistoryByPatientId(Long patientId);
+    List<MedicalHistoryDTO> getMedicalHistoryByPatientId(Long patientId);
 }
