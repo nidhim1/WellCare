@@ -149,12 +149,6 @@
               <div class="pl-lg-4">
                   <div>
                     <div class="form-group">
-                      <label class="form-control-label" for="input-patient-ID">Patient ID</label>
-                      <input type="text" id="input-patient-ID" class="form-control form-control-alternative" placeholder="Patient ID">
-                    </div>
-                  </div>
-                  <div>
-                    <div class="form-group">
                       <label class="form-control-label" for="staff-ID">Select Doctor</label>
                       <select id="staff-ID" class="form-control form-control-alternative" onchange="handlestaffID()">
                         <option value="" disabled selected>Select a Doctor</option>
@@ -259,8 +253,21 @@
     }
   }
 
+  // Fetch the first_name, middle_name, and last_name from the cookies
+  const firstName = getCookie('first_name') || 'Guest';
+  const middleName = getCookie('middle_name') || '';
+  const lastName = getCookie('last_name') || '';
+
+  // Format the full name
+  const fullName = `${firstName} ${lastName} `.trim();
+
   // Ensure the dropdown toggles when clicked
   document.addEventListener('DOMContentLoaded', () => {
+    const navbarNameElement = document.querySelector('.fullName'); // Target the top-right navbar name
+    if (navbarNameElement) {
+      navbarNameElement.textContent = fullName;
+    }
+
     const dropdownToggle = document.querySelector('.nav-item.dropdown > .nav-link');
     const dropdownMenu = document.querySelector('.nav-item.dropdown .dropdown-menu');
 
@@ -306,7 +313,7 @@
     // const formattedDateTime = `${appointmentDate}T00:00:00`;
 
     const appointment = {
-      patientId: document.getElementById('input-patient-ID').value,
+      patientId: getCookie('id'),
       staffId: document.getElementById('staff-ID').value,
       appointmentDate: appointmentDate,
       timeFrom:document.getElementById('input-time-from').value,
@@ -363,7 +370,7 @@
 
   // Function to view the list of appointments (navigate to the appointments page)
   function viewAppointments() {
-    window.location.href = "/appointment"; // Assuming this URL displays the list of appointments
+    window.location.href = "/patient-dashboard"; // Assuming this URL displays the list of appointments
   }
 </script>
 </body>

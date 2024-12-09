@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="/js/common.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Prescriptions Information - Dashboard</title>
@@ -25,9 +26,9 @@
         </button>
         <!-- Brand -->
         <h1>WellCare</h1>
-        <a class="navbar-brand pt-0" href="../index.html">
-            <img src="/img/brand/blue.png" class="navbar-brand-img" alt="...">
-        </a>
+<!--        <a class="navbar-brand pt-0" href="../index.html">-->
+<!--            <img src="/img/brand/blue.png" class="navbar-brand-img" alt="...">-->
+<!--        </a>-->
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
             <!-- Navigation -->
@@ -115,22 +116,22 @@
             <thead>
             <tr>
                 <th>Prescription ID</th>
-                <th>Patient ID</th>
-                <th>Staff ID</th>
+<!--                <th>Patient ID</th>-->
+<!--                <th>Staff ID</th>-->
                 <th>Issue Date</th>
                 <th>Medication</th>
                 <th>Dosage</th>
                 <th>Frequency</th>
                 <th>Duration</th>
-                <th>Timestamp</th>
-                <th>Actions</th>
+<!--                <th>Timestamp</th>-->
+<!--                <th>Actions</th>-->
             </tr>
             </thead>
             <tbody id="prescription-table-body">
             <!-- Rows will be dynamically added here -->
             </tbody>
         </table>
-        <button class="btn btn-primary" onclick="openAddPrescriptionModal()">Add New Prescription</button>
+<!--        <button class="btn btn-primary" onclick="openAddPrescriptionModal()">Add New Prescription</button>-->
     </div>
 
     <!-- Prescription Modal -->
@@ -224,8 +225,21 @@
         }
     }
 
+    // Fetch the first_name, middle_name, and last_name from the cookies
+    const firstName = getCookie('first_name') || 'Guest';
+    const middleName = getCookie('middle_name') || '';
+    const lastName = getCookie('last_name') || '';
+
+    // Format the full name
+    const fullName = `${firstName} ${lastName} `.trim();
+
     // Ensure the dropdown toggles when clicked
     document.addEventListener('DOMContentLoaded', () => {
+        const navbarNameElement = document.querySelector('.fullName'); // Target the top-right navbar name
+        if (navbarNameElement) {
+            navbarNameElement.textContent = fullName;
+        }
+
         const dropdownToggle = document.querySelector('.nav-item.dropdown > .nav-link');
         const dropdownMenu = document.querySelector('.nav-item.dropdown .dropdown-menu');
 
@@ -264,8 +278,10 @@
         fetchPrescriptionRecords();
     });
 
-    // Fetch existing prescriptions and display them
+    // Fetch existing prescriptions and display them for the logged-in patient
     function fetchPrescriptionRecords() {
+        const patientId = getCookie('id'); // Retrieve patient ID from cookie
+
         fetch('/prescriptions')
             .then(response => {
                 if (!response.ok) {
@@ -276,23 +292,26 @@
             .then(data => {
                 const tableBody = document.getElementById('prescription-table-body');
                 tableBody.innerHTML = ''; // Clear table
-                data.forEach(prescription => {
+
+                // Filter prescriptions by patientId
+                const filteredPrescriptions = data.filter(prescription => prescription.patientId == patientId);
+
+                if (filteredPrescriptions.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center">No prescriptions found for the current patient.</td></tr>`;
+                    return;
+                }
+
+                // Display filtered prescriptions
+                filteredPrescriptions.forEach(prescription => {
                     const row = `
-                    <tr>
-                        <td>${prescription.prescriptionId || ''}</td>
-                        <td>${prescription.patientId || ''}</td>
-                        <td>${prescription.staffId || ''}</td>
-                        <td>${prescription.issueDate || ''}</td>
-                        <td>${prescription.medication || ''}</td>
-                        <td>${prescription.dosage || ''}</td>
-                        <td>${prescription.frequency || ''}</td>
-                        <td>${prescription.duration || ''}</td>
-                        <td>${prescription.createdAtTimestamp || ''}</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning" onclick="editPrescription(${prescription.prescriptionId})">Edit</button>
-                             <button class="btn btn-sm btn-danger" onclick="deletePrescription(${prescription.prescriptionId})">Delete</button>
-                        </td>
-                    </tr>`;
+                <tr>
+                    <td>${prescription.prescriptionId || ''}</td>
+                    <td>${prescription.issueDate || ''}</td>
+                    <td>${prescription.medication || ''}</td>
+                    <td>${prescription.dosage || ''}</td>
+                    <td>${prescription.frequency || ''}</td>
+                    <td>${prescription.duration || ''}</td>
+                </tr>`;
                     tableBody.innerHTML += row;
                 });
             })
@@ -301,7 +320,6 @@
                 alert('Failed to fetch prescription records.');
             });
     }
-
     // Open the modal to add a new prescription
     function openAddPrescriptionModal() {
         document.getElementById('Prescription-form').reset();

@@ -247,8 +247,21 @@ WellCare  </title>
     }
   }
 
+  // Fetch the first_name, middle_name, and last_name from the cookies
+  const firstName = getCookie('first_name') || 'Guest';
+  const middleName = getCookie('middle_name') || '';
+  const lastName = getCookie('last_name') || '';
+
+  // Format the full name
+  const fullName = `${firstName} ${lastName} `.trim();
+
   // Ensure the dropdown toggles when clicked
   document.addEventListener('DOMContentLoaded', () => {
+    const navbarNameElement = document.querySelector('.fullName'); // Target the top-right navbar name
+    if (navbarNameElement) {
+      navbarNameElement.textContent = fullName;
+    }
+
     const dropdownToggle = document.querySelector('.nav-item.dropdown > .nav-link');
     const dropdownMenu = document.querySelector('.nav-item.dropdown .dropdown-menu');
 
