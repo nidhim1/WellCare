@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
+        Register
     </title>
     <!-- Favicon -->
     <link href="/img/brand/favicon.png" rel="icon" type="image/png">
@@ -46,7 +46,7 @@
                 <!-- Navbar items -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="../examples/register.html">
+                        <a class="nav-link nav-link-icon" href="/login">
                             <i class="ni ni-circle-08"></i>
                             <span class="nav-link-inner--text">Login</span>
                         </a>
@@ -96,6 +96,7 @@
 <!--                            <small>Or sign up with credentials</small>-->
 <!--                        </div>-->
                         <form role="form">
+                            <h1 class="text">Register</h1>
                             <div class="form-group">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
@@ -118,6 +119,19 @@
                                         <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                     </div>
                                     <input class="form-control" placeholder="Last Name" type="text" name="last_name" id="last_name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-briefcase-24"></i></span>
+                                    </div>
+                                    <select class="form-control" name="gender" id="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -179,24 +193,8 @@
         <div class="row align-items-center justify-content-xl-between">
             <div class="col-xl-6">
                 <div class="copyright text-center text-xl-left text-muted">
-                    &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+                    © 2024 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">OOD Group-10</a>
                 </div>
-            </div>
-            <div class="col-xl-6">
-                <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-                    <li class="nav-item">
-                        <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -216,6 +214,80 @@
         application: "argon-dashboard-free"
     });
 </script>
+
+<script>
+    // Function to generate a unique medical record number
+    function generateMedicalRecordNo(firstName, lastName, dob) {
+        const firstThree = firstName.slice(0, 3).toUpperCase(); // First 3 characters of firstName
+        const fourthChar = lastName.charAt(0).toUpperCase();   // First character of lastName
+        const lastTwo = dob.split("-")[2];                    // Day from DOB
+        return `${firstThree}${fourthChar}${lastTwo}`;
+    }
+
+    // Function to handle form submission
+    async function createAccount() {
+        // Get form data
+        const firstName = document.getElementById("first_name").value;
+        const middleName = document.getElementById("middle_name").value;
+        const lastName = document.getElementById("last_name").value;
+        const dob = document.getElementById("dob").value;
+        const gender = document.getElementById("gender").value;
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Validate required fields
+        if (!firstName || !lastName || !dob || !gender || !username || !email || !password) {
+            alert("Please fill out all required fields.");
+            return;
+        }
+
+        // Generate medical record number
+        const medicalRecordNo = generateMedicalRecordNo(firstName, lastName, dob);
+
+        // Prepare request payload
+        const payload = {
+            firstName: firstName,
+            middleName: middleName,
+            lastName: lastName,
+            dob: dob,
+            gender: gender,
+            userId: username,
+            password: password,
+            medicalRecordNo: medicalRecordNo
+        };
+
+        try {
+            // Send POST request to /api/patient-info
+            const response = await fetch("/api/patient-info", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                // Display success alert
+                alert("Patient Successfully Registered!");
+                // Redirect to the login page
+                window.location.href = "/login";
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.message || "Account creation failed."}`);
+            }
+        } catch (err) {
+            console.error("Error:", err);
+            alert("An error occurred while creating the account.");
+        }
+    }
+
+    // Attach the createAccount function to the button
+    document.querySelector(".btn-primary").addEventListener("click", createAccount);
+</script>
+
+
+
 </body>
 
 </html>
