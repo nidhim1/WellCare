@@ -13,5 +13,8 @@ public interface PatientContactInfoService {
 
     List<PatientContactInfoDTO> getAllPatientContactInfo();
 
+    PatientContactInfoDTO getPatientContactInfoById(Long id); // Add this method
+
+
     PatientContactInfoDTO updatePatientContactInfo(Long id, Map<String, Object> updates);
 }

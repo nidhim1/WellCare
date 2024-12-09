@@ -15,10 +15,7 @@ public class PatientContactInfoController {
     @Autowired
     private PatientContactInfoService patientContactInfoService;
 
-    @GetMapping("/PatientContactInfo")
-    public String PatientContactInfo(){
-        return "Hello World";
-    }
+
 
     @PostMapping("/patientcontactinfo")
     public PatientContactInfoDTO savePatientContactInfo(@RequestBody PatientContactInfoDTO patientContactInfoDTO){

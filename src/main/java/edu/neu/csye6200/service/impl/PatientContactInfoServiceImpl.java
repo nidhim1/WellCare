@@ -1,6 +1,6 @@
 package edu.neu.csye6200.service.impl;
-
 import edu.neu.csye6200.entity.PatientContactInfoEntity;
+import edu.neu.csye6200.exception.ResourceNotFoundException;
 import edu.neu.csye6200.model.PatientContactInfoDTO;
 import edu.neu.csye6200.repository.PatientContactInfoRepository;
 import edu.neu.csye6200.service.PatientContactInfoService;
@@ -16,6 +16,27 @@ public class PatientContactInfoServiceImpl implements PatientContactInfoService 
 
     @Autowired
     private PatientContactInfoRepository patientContactInfoRepository;
+
+    @Override
+    public PatientContactInfoDTO getPatientContactInfoById(Long id) {
+        // Find the entity by ID
+        PatientContactInfoEntity entity = patientContactInfoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contact Info not found with ID: " + id));
+
+        // Map the entity to DTO
+        PatientContactInfoDTO dto = new PatientContactInfoDTO();
+        dto.setPatientId(entity.getPatientId());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setEmail(entity.getEmail());
+        dto.setAddress(entity.getAddress());
+        dto.setCity(entity.getCity());
+        dto.setState(entity.getState());
+        dto.setPostalCode(entity.getPostalCode());
+        dto.setCountry(entity.getCountry());
+
+        return dto;
+    }
+
 
     @Override
     public PatientContactInfoDTO savePatientContactInfo(PatientContactInfoDTO patientContactInfoDTO) {
@@ -47,7 +68,6 @@ public class PatientContactInfoServiceImpl implements PatientContactInfoService 
                 .stream()
                 .map(entity -> {
                     PatientContactInfoDTO dto = new PatientContactInfoDTO();
-                    dto.setContactInfoId(entity.getContactInfoId());
                     dto.setPatientId(entity.getPatientId());
                     dto.setPhoneNumber(entity.getPhoneNumber());
                     dto.setEmail(entity.getEmail());
@@ -100,7 +120,6 @@ public class PatientContactInfoServiceImpl implements PatientContactInfoService 
 
         // Convert to DTO and return
         PatientContactInfoDTO updatedDTO = new PatientContactInfoDTO();
-        updatedDTO.setContactInfoId(existingContactInfo.getContactInfoId());
         updatedDTO.setPatientId(existingContactInfo.getPatientId());
         updatedDTO.setPhoneNumber(existingContactInfo.getPhoneNumber());
         updatedDTO.setEmail(existingContactInfo.getEmail());

@@ -14,6 +14,8 @@ import java.util.List;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
+
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorModel>> handleFieldValidation(MethodArgumentNotValidException ex) {
         List<ErrorModel> errorModels = new ArrayList<>();
@@ -31,8 +33,9 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<List<ErrorModel>> handleBusinessException(BusinessException be){
-        System.out.println("BusinessException is thrown");
-        return new ResponseEntity<List<ErrorModel>>(be.getErrors(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<ErrorModel>> handleBusinessException(BusinessException be) {
+        System.out.println("BusinessException is thrown: " + be.getErrors());
+        return new ResponseEntity<>(be.getErrors(), HttpStatus.BAD_REQUEST);
     }
+
 }
