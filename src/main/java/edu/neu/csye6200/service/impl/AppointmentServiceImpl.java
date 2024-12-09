@@ -48,4 +48,26 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void deleteAppointment(Long appointmentId) {
         appointmentRepository.deleteById(appointmentId);
     }
+
+    @Override
+    public AppointmentDTO updateAppointment(Long appointmentId, AppointmentDTO appointmentDTO) {
+        AppointmentEntity entity = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+
+        // Update only non-null fields
+        if (appointmentDTO.getPatientId() != null) entity.setPatientId(appointmentDTO.getPatientId());
+        if (appointmentDTO.getStaffId() != null) entity.setStaffId(appointmentDTO.getStaffId());
+        if (appointmentDTO.getAppointmentDate() != null) entity.setAppointmentDate(appointmentDTO.getAppointmentDate());
+        if (appointmentDTO.getTimeFrom() != null) entity.setTimeFrom(appointmentDTO.getTimeFrom());
+        if (appointmentDTO.getTimeTo() != null) entity.setTimeTo(appointmentDTO.getTimeTo());
+        if (appointmentDTO.getStatus() != null) entity.setStatus(appointmentDTO.getStatus());
+        if (appointmentDTO.getReason() != null) entity.setReason(appointmentDTO.getReason());
+        if (appointmentDTO.getAppointmentType() != null) entity.setAppointmentType(appointmentDTO.getAppointmentType());
+
+        entity = appointmentRepository.save(entity);
+
+        AppointmentDTO updatedDTO = new AppointmentDTO();
+        BeanUtils.copyProperties(entity, updatedDTO);
+        return updatedDTO;
+    }
 }
