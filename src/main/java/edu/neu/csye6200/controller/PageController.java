@@ -56,6 +56,12 @@ public class PageController {
     public String staffProfilePage() {
         return "staffprofile"; // Return the name of your HTML file without the .html extension
     }
+
+    @GetMapping("/staffprofiletesting")
+    public String showStaffProfilePage() {
+        return "staffprofiletesting"; // Name of the HTML file in the templates folder
+    }
+
 }
 
 
