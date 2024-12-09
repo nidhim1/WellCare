@@ -36,10 +36,46 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void updateStaff(int staffId, StaffDTO staffDTO) {
-        Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new RuntimeException("Staff not found"));
-        mapDtoToEntity(staffDTO, staff);
+        Staff staff = staffRepository.findById(staffId)
+                .orElseThrow(() -> new RuntimeException("Staff not found"));
+
+        // Update only non-null fields
+        if (staffDTO.getFirstName() != null) {
+            staff.setFirstName(staffDTO.getFirstName());
+        }
+        if (staffDTO.getMiddleName() != null) {
+            staff.setMiddleName(staffDTO.getMiddleName());
+        }
+        if (staffDTO.getLastName() != null) {
+            staff.setLastName(staffDTO.getLastName());
+        }
+        if (staffDTO.getRole() != null) {
+            staff.setRole(staffDTO.getRole());
+        }
+        if (staffDTO.getDepartment() != null) {
+            staff.setDepartment(staffDTO.getDepartment());
+        }
+        if (staffDTO.getPhoneNumber() != null) {
+            staff.setPhoneNumber(staffDTO.getPhoneNumber());
+        }
+        if (staffDTO.getEmail() != null) {
+            staff.setEmail(staffDTO.getEmail());
+        }
+        if (staffDTO.getSpecialization() != null) {
+            staff.setSpecialization(staffDTO.getSpecialization());
+        }
+        if (staffDTO.getUsername() != null) {
+            staff.setUserName(staffDTO.getUsername());
+        }
+        if (staffDTO.getPassword() != null) {
+            staff.setPassword(staffDTO.getPassword());
+        }
+        // Update boolean fields
+        staff.setAvailability(staffDTO.isAvailability());
+
         staffRepository.save(staff);
     }
+
 
     //Utility methods to map between DTO and Entity
     private void mapDtoToEntity(StaffDTO staffDTO, Staff staff) {

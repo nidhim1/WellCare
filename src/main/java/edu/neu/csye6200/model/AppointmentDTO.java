@@ -1,21 +1,19 @@
 package edu.neu.csye6200.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.time.LocalDate;
-//import java.time.LocalDateTime;
 
 public class AppointmentDTO {
     private Long appointmentId;
     private Long patientId;
     private Long staffId;
-//    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate appointmentDate;
     private String timeFrom;
     private String timeTo;
     private String status; // Scheduled, Completed, Canceled, etc.
     private String reason; // Reason for appointment, e.g., checkup, follow-up, etc.
     private String appointmentType; // Consultation, Follow-up, Emergency, etc.
+    private String patientName;
+    private String staffName;
 
     // Getters and Setters
     public Long getAppointmentId() { return appointmentId; }
@@ -53,4 +51,12 @@ public class AppointmentDTO {
     public String getAppointmentType() { return appointmentType; }
 
     public void setAppointmentType(String appointmentType) { this.appointmentType = appointmentType; }
+
+    public String getPatientName() { return patientName; }
+
+    public void setPatientName(String patientName) { this.patientName = patientName; }
+
+    public String getStaffName() { return staffName; }
+
+    public void setStaffName(String staffName) { this.staffName = staffName; }
 }
