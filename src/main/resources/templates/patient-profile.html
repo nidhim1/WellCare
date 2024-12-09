@@ -516,6 +516,7 @@
       },
     })
             .then((response) => {
+              console.log(response);
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
@@ -659,7 +660,6 @@
     const patientData = {
       patientId: document.getElementById('input-patient-id').value,
       firstName: document.getElementById('input-first-name').value,
-      // middleName: document.getElementById('input-middle-name').value,
       lastName: document.getElementById('input-last-name').value,
       userId: document.getElementById('input-user-name').value,
       dob: document.getElementById('input-dob').value,
@@ -687,8 +687,8 @@
     // Save all fields to the server
     Promise.all([
       savePatientInfo(patientData),
-      // saveInsuranceInfo(patientData.patientId, insuranceData),
-      // saveContactInfo(patientData.patientId, contactData),
+      saveInsuranceInfo(patientData.patientId, insuranceData),
+      saveContactInfo(patientData.patientId, contactData),
     ])
             .then(() => {
               alert('Profile updated successfully!');
@@ -750,29 +750,9 @@
     });
   }
 
-
-
-
 </script>
 
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
