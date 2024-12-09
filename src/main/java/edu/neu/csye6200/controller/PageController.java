@@ -13,6 +13,11 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register";
+    }
+
 
     @GetMapping("/insurance")
     public String showInsurancePage() {
