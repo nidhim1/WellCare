@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
+        My Profile
     </title>
     <!-- Favicon -->
     <link href="/img/brand/favicon.png" rel="icon" type="image/png">
@@ -16,6 +16,8 @@
     <link href="/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+
+    <script src="/js/common.js"></script>
 </head>
 
 <body class="">
@@ -239,16 +241,16 @@
     </nav>
     <!-- End Navbar -->
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-size: cover; background-position: center top;">
         <!-- Mask -->
         <span class="mask bg-gradient-default opacity-8"></span>
         <!-- Header container -->
         <div class="container-fluid d-flex align-items-center">
             <div class="row">
-                <div class="col-lg-7 col-md-10">
+                <div class="col">
                     <h1 class="display-2 text-white">Hello Sarah</h1>
 <!--                    <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>-->
-                    <a href="#!" class="btn btn-info">Edit profile</a>
+                    <a id="edit-profile-button" class="btn btn-info">Edit profile</a>
                 </div>
             </div>
         </div>
@@ -291,6 +293,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body">
                         <form>
                             <h6 class="heading-small text-muted mb-4">User information</h6>
@@ -337,6 +340,11 @@
                                 </div>
                             </div>
                         </form>
+
+                        <!-- Save Button -->
+                        <div class="text-right">
+                            <button id="save-profile-button" class="btn btn-sm btn-primary" style="display: none;">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -381,6 +389,126 @@
     TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
+    });
+</script>
+
+<script>
+    console.log(getCookie('token'));
+
+    const staffId = getCookie('id'); // Ensure the 'id' cookie is set when the user logs in
+    console.log(staffId);
+
+    // Function to fetch staff details and populate the fields
+    async function fetchAndDisplayStaffDetails() {
+        // Get the staff ID from the cookie
+
+        if (!staffId) {
+            alert('Staff ID not found. Please log in.');
+            window.location.href = '/login'; // Redirect to login if ID is missing
+            return;
+        }
+
+        try {
+            // Fetch staff details from the API
+            const response = await fetch(`/api/v1/staff/get/${staffId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${getCookie('token')}`, // Include JWT token
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+
+                // Populate fields with the fetched data
+                document.getElementById('input-username').value = data.username;
+                document.getElementById('input-email').value = data.email;
+                document.getElementById('input-first-name').value = data.firstName;
+                document.getElementById('input-middle-name').value = data.middleName || '';
+                document.getElementById('input-last-name').value = data.lastName;
+                document.getElementById('input-contact-number').value = data.phoneNumber;
+
+                // Update specialization and department display
+                document.querySelector('.card-profile .text-center h3:nth-child(1)').innerText = `Department: ${data.department}`;
+                document.querySelector('.card-profile .text-center h3:nth-child(2)').innerText = `Specialization: ${data.specialization}`;
+
+                const fullName = `${data.firstName} ${data.middleName ? data.middleName + ' ' : ''}${data.lastName}`;
+
+                document.querySelector('.display-2.text-white').innerText = `Hello ${fullName}`;
+                document.querySelector('.media-body.ml-2.d-none.d-lg-block .font-weight-bold').innerText = data.firstName;
+
+
+            } else {
+                alert('Failed to fetch staff details. Please try again.');
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching staff details:', error);
+            alert('An error occurred while fetching staff details.');
+        }
+    }
+
+    // Fetch and populate staff details on page load
+    document.addEventListener('DOMContentLoaded', fetchAndDisplayStaffDetails);
+
+
+    // Function to disable all form inputs
+    function toggleFormInputs(disabled) {
+        const formElements = document.querySelectorAll('form input, form select, form textarea');
+        formElements.forEach(element => {
+            element.disabled = disabled;
+        });
+
+        // Show or hide the save button based on the edit state
+        const saveButton = document.getElementById('save-profile-button');
+        saveButton.style.display = disabled ? 'none' : 'block';
+    }
+
+    // Function to enable form inputs when edit button is clicked
+    function enableFormInputs() {
+        toggleFormInputs(false);
+    }
+
+    // Function to handle save action
+    function saveProfile() {
+        // Collect form data
+        const profileData = {
+            username: document.getElementById('input-username').value,
+            email: document.getElementById('input-email').value,
+            firstName: document.getElementById('input-first-name').value,
+            middleName: document.getElementById('input-middle-name').value,
+            lastName: document.getElementById('input-last-name').value,
+            phoneNumber: document.getElementById('input-contact-number').value,
+        };
+
+        console.log("Profile Data to Save:", profileData);
+
+        fetch(`/api/v1/staff/update/${staffId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(profileData),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Profile updated successfully.');
+                toggleFormInputs(true); // Disable form again
+            } else {
+                alert('Failed to update profile.');
+            }
+        })
+        .catch(error => console.error('Error saving profile:', error));
+    }
+
+    // Attach event listener to the "Edit profile" button
+    document.addEventListener('DOMContentLoaded', () => {
+        toggleFormInputs(true); // Disable all inputs initially
+        document.getElementById('edit-profile-button').addEventListener('click', enableFormInputs);
+        document.getElementById('save-profile-button').addEventListener('click', saveProfile);
     });
 </script>
 </body>

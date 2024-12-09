@@ -33,6 +33,7 @@ public class SecurityConfig {
 //                .requestMatchers("/css/**", "/js/**", "/img/**",  "/static/**").permitAll()
 
                 .requestMatchers("api/v1/login").permitAll()
+                .requestMatchers("api/patient-info").permitAll()
                 .requestMatchers("patient-dashboard").hasRole("PATIENT")
                 .requestMatchers("staff-dashboard").hasRole("STAFF")
                 .anyRequest().authenticated()

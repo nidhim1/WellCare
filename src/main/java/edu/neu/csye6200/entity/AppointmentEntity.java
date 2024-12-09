@@ -1,7 +1,10 @@
 package edu.neu.csye6200.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+import java.util.Date;
+//import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "appointment")
@@ -19,7 +22,7 @@ public class AppointmentEntity {
     private Long staffId;
 
     @Column(nullable = false)
-    private LocalDateTime appointmentDate;
+    private LocalDate appointmentDate;
 
     @Column(nullable = false)
     private String timeFrom;
@@ -35,8 +38,17 @@ public class AppointmentEntity {
     @Column(nullable = false)
     private String appointmentType;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAtTimestamp = LocalDateTime.now();
+    @Column(name = "created_at_timestamp", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAtTimestamp;
+
+    public void setCreatedAtTimestamp(Date createdAtTimestamp) {
+        this.createdAtTimestamp = createdAtTimestamp;
+    }
+
+    public Date getCreatedAtTimestamp() {
+        return createdAtTimestamp;
+    }
 
     // Getters and Setters
     public Long getAppointmentId() { return appointmentId; }
@@ -51,9 +63,9 @@ public class AppointmentEntity {
 
     public void setStaffId(Long staffId) { this.staffId = staffId; }
 
-    public LocalDateTime getAppointmentDate() { return appointmentDate; }
+    public LocalDate getAppointmentDate() { return appointmentDate; }
 
-    public void setAppointmentDate(LocalDateTime appointmentDate) { this.appointmentDate = appointmentDate; }
+    public void setAppointmentDate(LocalDate appointmentDate) { this.appointmentDate = appointmentDate; }
 
     public String getTimeFrom() { return timeFrom; }
 
@@ -74,8 +86,4 @@ public class AppointmentEntity {
     public String getAppointmentType() { return appointmentType; }
 
     public void setAppointmentType(String appointmentType) { this.appointmentType = appointmentType; }
-
-    public LocalDateTime getCreatedAtTimestamp() { return createdAtTimestamp; }
-
-    public void setCreatedAtTimestamp(LocalDateTime createdAtTimestamp) { this.createdAtTimestamp = createdAtTimestamp; }
 }

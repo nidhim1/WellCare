@@ -9,4 +9,5 @@ public interface AppointmentService {
     AppointmentDTO getAppointmentById(Long appointmentId);
     List<AppointmentDTO> getAllAppointments();
     void deleteAppointment(Long appointmentId);
+    AppointmentDTO updateAppointment(Long appointmentId, AppointmentDTO appointmentDTO);
 }

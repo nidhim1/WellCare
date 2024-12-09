@@ -13,6 +13,11 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register";
+    }
+
 
     @GetMapping("/insurance")
     public String showInsurancePage() {
@@ -47,3 +52,27 @@ public class PageController {
     }
 
 }
+    // Prescription Management Page
+    @GetMapping("/prescriptions-management")
+    public String showPrescriptionManagementPage() {
+        return "prescriptions";
+    }
+
+    @GetMapping("/patient-info")
+    public String showPatientInfoPage() {
+        return "patient-info"; // Map to patient-info.html
+    }
+
+    @GetMapping("/staff-profile")
+    public String staffProfilePage() {
+        return "staffprofile"; // Return the name of your HTML file without the .html extension
+    }
+
+    @GetMapping("/staffprofiletesting")
+    public String showStaffProfilePage() {
+        return "staffprofiletesting"; // Name of the HTML file in the templates folder
+    }
+
+}
+
+
