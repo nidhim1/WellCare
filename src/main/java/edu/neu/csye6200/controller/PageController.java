@@ -20,7 +20,7 @@ public class PageController {
     }
 
 @GetMapping("/patient-profile")
-    public String showPatientProfilePage() {return "patient-profile";}
+    public String showPatientProfilePage() { return "patient-profile";}
 
     @GetMapping("/appointment")
     public String showAppointmentPage() { return "appointment"; }
@@ -40,5 +40,7 @@ public class PageController {
     public String showStaffAllAppointmentsPage() {
         return "staff-all-appointments";
     }
+
+   public String showPatientDashboardPage() { return "patient-dashboard"; }
 
 }
