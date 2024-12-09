@@ -249,6 +249,89 @@
 </script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const apiUrl = '/appointments';
+        let currentAppointmentId = null;
+
+        // Event delegation for Update Status button click
+        document.querySelector('#appointments-body').addEventListener('click', function (event) {
+            if (event.target && event.target.classList.contains('update-status-btn')) {
+                currentAppointmentId = event.target.dataset.appointmentId;
+                // Show the modal
+                jQuery('#updateStatusModal').modal('show');
+            }
+        });
+
+        // Update button in modal
+        document.querySelector('#updateStatusButton').addEventListener('click', async function () {
+            const selectedStatus = document.querySelector('input[name="status"]:checked');
+            if (!selectedStatus) {
+                alert('Please select a status!');
+                return;
+            }
+            try {
+                const response = await fetch(`${apiUrl}/${currentAppointmentId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: selectedStatus.value }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to update status');
+                }
+                // Reload appointments after update
+                loadAppointments();
+                $('#updateStatusModal').modal('hide');
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('Failed to update appointment status.');
+            }
+        });
+
+        // Function to load appointments
+        async function loadAppointments() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch appointments');
+                }
+                const appointments = await response.json();
+                const tableBody = document.querySelector('#appointments-body');
+                tableBody.innerHTML = ''; // Clear table body
+                // Filter appointments with status "Pending"
+                const pendingAppointments = appointments.filter(
+                    (appointment) => appointment.status === 'Pending'
+                );
+                pendingAppointments.forEach((appointment, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+<td>${index + 1}</td>
+<td>${appointment.patientName}</td>
+<td>${appointment.staffName}</td>
+<td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
+<td>${appointment.timeFrom} - ${appointment.timeTo}</td>
+<td>${appointment.status}</td>
+<td>${appointment.reason}</td>
+<td>${appointment.appointmentType}</td>
+<td>
+<button class="btn btn-info update-status-btn" data-appointment-id="${appointment.appointmentId}">
+                            Update Status
+</button>
+</td>
+                `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+                alert('Failed to load appointments.');
+            }
+        }
+
+        // Initial load
+        loadAppointments();
+    });
+
     // Logout function
     function logout() {
         // Show confirmation alert
@@ -313,94 +396,6 @@
         } else {
             console.error("Logout link not found in the DOM.");
         }
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const apiUrl = '/appointments';
-        let currentAppointmentId = null;
-
-        // Event delegation for Update Status button click
-        document.getElementById('appointments-body').addEventListener('click', function (event) {
-            if (event.target.classList.contains('update-status-btn')) {
-                currentAppointmentId = event.target.dataset.appointmentId;
-                $('#updateStatusModal').modal('show');
-            }
-        });
-
-        // Update button in modal
-        document.getElementById('updateStatusButton').addEventListener('click', async function () {
-            const selectedStatus = document.querySelector('input[name="status"]:checked');
-            if (!selectedStatus) {
-                alert('Please select a status!');
-                return;
-            }
-
-            try {
-                const response = await fetch(`${apiUrl}/${currentAppointmentId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ status: selectedStatus.value }),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to update status');
-                }
-
-                // Reload appointments after update
-                loadAppointments();
-                $('#updateStatusModal').modal('hide');
-            } catch (error) {
-                console.error('Error updating status:', error);
-                alert('Failed to update appointment status.');
-            }
-        });
-
-        // Function to load appointments
-        async function loadAppointments() {
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch appointments');
-                }
-
-                const appointments = await response.json();
-                const tableBody = document.getElementById('appointments-body');
-                tableBody.innerHTML = ''; // Clear table body
-
-                // Filter appointments with status "Pending"
-                const pendingAppointments = appointments.filter(
-                    (appointment) => appointment.status === 'Pending'
-                );
-
-                pendingAppointments.forEach((appointment, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${appointment.patientName}</td>
-                    <td>${appointment.staffName}</td>
-                    <td>${new Date(appointment.appointmentDate).toLocaleDateString()}</td>
-                    <td>${appointment.timeFrom} - ${appointment.timeTo}</td>
-                    <td>${appointment.status}</td>
-                    <td>${appointment.reason}</td>
-                    <td>${appointment.appointmentType}</td>
-                    <td>
-                        <button class="btn btn-info update-status-btn" data-appointment-id="${appointment.appointmentId}">
-                            Update Status
-                        </button>
-                    </td>
-                `;
-                    tableBody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Error fetching appointments:', error);
-                alert('Failed to load appointments.');
-            }
-        }
-
-        // Initial load
-        loadAppointments();
     });
 </script>
 
