@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <script src="/js/common.js"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
@@ -297,6 +298,7 @@
                     </div>
                   </div>
                   <div>
+                  <div>
                     <div class="form-group">
                       <label class="form-control-label" for="input-reason">Reason</label>
                       <textarea id="input-reason" class="form-control form-control-alternative" placeholder="Reason"></textarea>
@@ -319,6 +321,7 @@
                       <button type="button" class="btn btn-primary" onclick="viewAppointments()">View Appointment</button>
                     </div >
                 </div>
+              </div>
               </div>
               </div>
             </form>
@@ -370,7 +373,8 @@
       timeFrom:document.getElementById('input-time-from').value,
       timeTo:document.getElementById('input-time-to').value,
       reason: document.getElementById('input-reason').value,
-      appointmentType: document.getElementById('input-appointment-type').value
+      appointmentType: document.getElementById('input-appointment-type').value,
+      status: "Pending"
     };
 
     console.log(appointment);
@@ -382,7 +386,10 @@
 
     fetch(baseUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(appointment)
     })
             .then(response => {
