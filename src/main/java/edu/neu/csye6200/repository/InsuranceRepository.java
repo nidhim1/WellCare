@@ -8,5 +8,5 @@ import java.util.Optional;
 @Repository
 public interface InsuranceRepository extends JpaRepository<Insurance, Integer> {
     // Add custom query methods as needed, for example:
-    Optional<Insurance> findByInsuranceNumber(String insuranceNumber);
+    Optional<Insurance> findByPatientId(int patientId);
 }

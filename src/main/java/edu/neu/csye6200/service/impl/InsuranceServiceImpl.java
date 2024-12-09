@@ -41,16 +41,34 @@ public class InsuranceServiceImpl implements InsuranceService {
 
 
     @Override
-    public InsuranceDTO getInsuranceById(int id) {
-        Insurance insurance = insuranceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Insurance not found with id: " + id));
+    public InsuranceDTO getInsuranceByPatientId(int patientId) {
+//        Insurance insurance = insuranceRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Insurance not found with id: " + id));
+//
+//        InsuranceDTO dto = new InsuranceDTO();
+//        dto.setPatientId(insurance.getPatientId());
+//        dto.setInsuranceNumber(insurance.getInsuranceNumber());
+//        dto.setInsuranceProvider(insurance.getInsuranceProvider());
+//        dto.setInsuranceType(insurance.getInsuranceType());
+//        dto.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").format(insurance.getInsuranceDate()));
+//        dto.setCoverageDetails(insurance.getCoverageDetails());
+//        return dto;
+
+        Insurance insurance = insuranceRepository.findByPatientId(patientId)
+                .orElseThrow(() -> new RuntimeException("Insurance not found for patientId: " + patientId));
 
         InsuranceDTO dto = new InsuranceDTO();
         dto.setPatientId(insurance.getPatientId());
         dto.setInsuranceNumber(insurance.getInsuranceNumber());
         dto.setInsuranceProvider(insurance.getInsuranceProvider());
         dto.setInsuranceType(insurance.getInsuranceType());
-        dto.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").format(insurance.getInsuranceDate()));
+
+        if (insurance.getInsuranceDate() != null) {
+            dto.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").format(insurance.getInsuranceDate()));
+        } else {
+            dto.setInsuranceDate(null);
+        }
+
         dto.setCoverageDetails(insurance.getCoverageDetails());
         return dto;
     }

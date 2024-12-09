@@ -18,7 +18,7 @@ public class InsuranceController {
 
     @GetMapping("/Insurance/{id}")
     public InsuranceDTO getInsuranceById(@PathVariable int id) {
-        return insuranceService.getInsuranceById(id);
+        return insuranceService.getInsuranceByPatientId(id);
     }
 
     @GetMapping("/Insurance")
