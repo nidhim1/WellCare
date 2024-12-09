@@ -74,30 +74,51 @@ public class InsuranceServiceImpl implements InsuranceService {
     }
 
     @Override
-    public InsuranceDTO updateInsurance(int id, InsuranceDTO insuranceDTO) {
-        Insurance insurance = insuranceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Insurance not found with id: " + id));
+    public InsuranceDTO updateInsurance(int patientId, InsuranceDTO insuranceDTO) {
+        Insurance insurance = insuranceRepository.findByPatientId(patientId)
+                .orElseThrow(() -> new RuntimeException("Insurance not found for patientId: " + patientId));
 
-        insurance.setInsuranceNumber(insuranceDTO.getInsuranceNumber());
-        insurance.setInsuranceProvider(insuranceDTO.getInsuranceProvider());
-        insurance.setInsuranceType(insuranceDTO.getInsuranceType());
-        try {
-            insurance.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").parse(insuranceDTO.getInsuranceDate()));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        // Update only the fields that are present in the DTO (non-null)
+        if (insuranceDTO.getInsuranceNumber() != null) {
+            insurance.setInsuranceNumber(insuranceDTO.getInsuranceNumber());
         }
-        insurance.setCoverageDetails(insuranceDTO.getCoverageDetails());
+        if (insuranceDTO.getInsuranceProvider() != null) {
+            insurance.setInsuranceProvider(insuranceDTO.getInsuranceProvider());
+        }
+        if (insuranceDTO.getInsuranceType() != null) {
+            insurance.setInsuranceType(insuranceDTO.getInsuranceType());
+        }
+        if (insuranceDTO.getInsuranceDate() != null) {
+            try {
+                insurance.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").parse(insuranceDTO.getInsuranceDate()));
+            } catch (ParseException e) {
+                throw new RuntimeException("Invalid date format. Expected format: yyyy-MM-dd");
+            }
+        }
+        if (insuranceDTO.getCoverageDetails() != null) {
+            insurance.setCoverageDetails(insuranceDTO.getCoverageDetails());
+        }
 
+        // Save the updated insurance
         Insurance updatedInsurance = insuranceRepository.save(insurance);
 
+        // Map updated insurance entity back to DTO
         InsuranceDTO updatedDTO = new InsuranceDTO();
+        updatedDTO.setPatientId(updatedInsurance.getPatientId());
         updatedDTO.setInsuranceNumber(updatedInsurance.getInsuranceNumber());
         updatedDTO.setInsuranceProvider(updatedInsurance.getInsuranceProvider());
         updatedDTO.setInsuranceType(updatedInsurance.getInsuranceType());
-        updatedDTO.setInsuranceDate(new SimpleDateFormat("yyyy-MM-dd").format(updatedInsurance.getInsuranceDate()));
+        updatedDTO.setInsuranceDate(
+                updatedInsurance.getInsuranceDate() != null
+                        ? new SimpleDateFormat("yyyy-MM-dd").format(updatedInsurance.getInsuranceDate())
+                        : null
+        );
         updatedDTO.setCoverageDetails(updatedInsurance.getCoverageDetails());
+
         return updatedDTO;
     }
+
+
 
 
     @Override
