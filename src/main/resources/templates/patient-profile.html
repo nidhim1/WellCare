@@ -476,102 +476,114 @@
 </script>
 <script>
 
-  function fetchPatientRecords() {
-    fetch('/api/v1/patient-info', {
+
+  function fetchPatientInfo(patientId) {
+    fetch(`/api/v1/patient-info/${patientId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include JWT token
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
-            .then(response => {
+            .then((response) => {
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
               return response.json();
             })
-            .then(data => {
-              const tableBody = document.getElementById('patient-table-body');
-              tableBody.innerHTML = ''; // Clear existing rows
+            .then((data) => {
+              console.log(data); // Debugging
 
-              // Populate table with patient records
-              data.forEach(record => {
-                console.log(record); // Debugging
-                const row = `
-                <tr>
-                    <td>${record.patientId}</td>
-                    <td>${record.firstName}</td>
-                    <td>${record.lastName}</td>
-                    <td>${record.username}</td>
-                    <td>${record.dob}</td>
-                    <td>${record.gender}</td>
-                    <td>${record.medicalRecordNo}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning" onclick="editPatient('${record.patientId}')">Edit</button>
-                        <button class="btn btn-sm btn-danger" onclick="deletePatient('${record.patientId}')">Delete</button>
-                    </td>
-                </tr>`;
-                tableBody.innerHTML += row;
-              });
+              // Populate form fields with the contact info
+              document.getElementById('input-phone-number').value = data.phoneNumber || '';
+              document.getElementById('input-email').value = data.email || '';
+              document.getElementById('input-address').value = data.address || '';
+              document.getElementById('input-city').value = data.city || '';
+              document.getElementById('input-state').value = data.state || '';
+              document.getElementById('input-postal-code').value = data.postalCode || '';
+              document.getElementById('input-country').value = data.country || '';
             })
-            .catch(error => {
-              console.error('Error fetching patient records:', error);
-              alert('Failed to load patient records.');
+            .catch((error) => {
+              console.error('Error fetching patient contact info:', error);
+              alert('Failed to load patient contact information.');
             });
   }
 
-  // Call this function on page load
-  document.addEventListener('DOMContentLoaded', fetchPatientRecords);
+  // Call this function on page load with the patient ID
+  document.addEventListener('DOMContentLoaded', () => {
+    const patientId = 1; // Replace this with the actual patient ID
+    fetchPatientInfo(patientId);
+  });
 
-
-
-  function fetchPatientContactRecords() {
-    fetch('/api/v1/patient-contact-info', {
+  function fetchInsuranceInfo(patientId) {
+    fetch(`/api/v1/Insurance/${patientId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include JWT token
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
-            .then(response => {
+            .then((response) => {
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
               return response.json();
             })
-            .then(data => {
-              const tableBody = document.getElementById('contact-table-body');
-              tableBody.innerHTML = ''; // Clear existing rows
+            .then((data) => {
+              console.log(data); // Debugging
 
-              // Populate table with contact records
-              data.forEach(record => {
-                console.log(record); // Debugging
-                const row = `
-                <tr>
-                    <td>${record.patientId}</td>
-                    <td>${record.phoneNumber}</td>
-                    <td>${record.email}</td>
-                    <td>${record.address}</td>
-                    <td>${record.city}</td>
-                    <td>${record.state}</td>
-                    <td>${record.postalCode}</td>
-                    <td>${record.country}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning" onclick="editContact('${record.contactInfoId}')">Edit</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteContact('${record.contactInfoId}')">Delete</button>
-                    </td>
-                </tr>`;
-                tableBody.innerHTML += row;
-              });
+              // Populate form fields with the insurance info
+              document.getElementById('input-insurance-id').value = data.insuranceId || '';
+              document.getElementById('input-insurance-provider').value = data.insuranceProvider || '';
+              document.getElementById('input-insurance-type').value = data.insuranceType || '';
+              document.getElementById('input-insurance-date').value = data.insuranceDate || '';
+              document.getElementById('input-coverage-details').value = data.coverageDetails || '';
             })
-            .catch(error => {
-              console.error('Error fetching contact records:', error);
-              alert('Failed to load contact records.');
+            .catch((error) => {
+              console.error('Error fetching insurance info:', error);
+              alert('Failed to load insurance information.');
             });
   }
 
-  // Call this function on page load
-  document.addEventListener('DOMContentLoaded', fetchPatientContactRecords);
+  // Call this function on page load with the patient ID
+  document.addEventListener('DOMContentLoaded', () => {
+    const patientId = 1; // Replace this with the actual patient ID
+    fetchInsuranceInfo(patientId);
+  });
+
+
+  function fetchPatientContactInfo(patientId) {
+    fetch(`/api/v1/patient-contact-info/${patientId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include JWT token
+        'Content-Type': 'application/json',
+      },
+    })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data); // Debugging
+
+              // Populate form fields with the contact info
+              document.getElementById('input-city').value = data.city || '';
+              document.getElementById('input-state').value = data.state || '';
+              document.getElementById('input-postal-code').value = data.postalCode || '';
+              document.getElementById('input-country').value = data.country || '';
+              document.getElementById('phoneNumber').value = data.phoneNumber || '';
+              document.getElementById('email').value = data.email || '';
+              document.getElementById('address').value = data.address || '';
+            })
+            .catch((error) => {
+              console.error('Error fetching patient contact info:', error);
+              alert('Failed to load patient contact information.');
+            });
+  }
+
 
 
 
