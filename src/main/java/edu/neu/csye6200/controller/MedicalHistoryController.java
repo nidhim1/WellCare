@@ -54,4 +54,12 @@ public class MedicalHistoryController {
         medicalHistoryService.deleteMedicalHistory(id);
         return ResponseEntity.ok("Medical history deleted successfully.");
     }
+
+    @GetMapping("/medical-history/{id}")
+    public ResponseEntity<List<MedicalHistoryDTO>> getMedicalHistoryByPatientId(@PathVariable("id") Long patientId) {
+        List<MedicalHistoryDTO> histories = medicalHistoryService.getMedicalHistoryByPatientId(patientId);
+        return ResponseEntity.ok(histories);
+    }
+
+
 }

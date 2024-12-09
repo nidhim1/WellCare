@@ -126,4 +126,19 @@ public class MedicalHistoryImpl implements MedicalHistoryService {
         dto.setHistoryStatus(history.getHistoryStatus());
         return dto;
     }
+
+    @Override
+    public List<MedicalHistoryDTO> getMedicalHistoryByPatientId(Long patientId) {
+        List<MedicalHistory> histories = medicalHistoryRepository.findByPatientId(patientId);
+
+        if (histories.isEmpty()) {
+            throw new RuntimeException("No medical history found for patientId: " + patientId);
+        }
+
+        return histories.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+
 }

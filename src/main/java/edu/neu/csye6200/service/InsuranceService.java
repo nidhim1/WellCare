@@ -6,7 +6,7 @@ import java.util.List;
 public interface InsuranceService {
     InsuranceDTO saveInsurance(InsuranceDTO insuranceDTO);
     List<InsuranceDTO> getAllInsurance();
-    InsuranceDTO getInsuranceById(int id);
+    InsuranceDTO getInsuranceByPatientId(int id);
     InsuranceDTO updateInsurance(int id, InsuranceDTO insuranceDTO);
     void deleteInsurance(int id);
 }

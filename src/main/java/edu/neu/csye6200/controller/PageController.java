@@ -25,7 +25,7 @@ public class PageController {
     }
 
 @GetMapping("/patient-profile")
-    public String showPatientProfilePage() {return "patient-profile";}
+    public String showPatientProfilePage() { return "patient-profile";}
 
     @GetMapping("/appointment")
     public String showAppointmentPage() { return "appointment"; }
@@ -45,6 +45,13 @@ public class PageController {
     public String showStaffAllAppointmentsPage() {
         return "staff-all-appointments";
     }
+
+    @GetMapping("/medical-history")
+    public String showMedicalHistoryPage() {
+        return "medical-history";
+    }
+
+   public String showPatientDashboardPage() { return "patient-dashboard"; }
 
     // Prescription Management Page
     @GetMapping("/prescriptions-management")

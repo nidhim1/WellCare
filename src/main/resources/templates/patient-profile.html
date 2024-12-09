@@ -17,10 +17,12 @@
 <html lang="en">
 
 <head>
+
+  <script src="/js/common.js"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
+    WellCare
   </title>
   <!-- Favicon -->
   <link href="/img/brand/favicon.png" rel="icon" type="image/png">
@@ -41,9 +43,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Brand -->
-    <a class="navbar-brand pt-0" href="../index.html">
-      <img src="/img/brand/blue.png" class="navbar-brand-img" alt="...">
-    </a>
+    <h1>WellCare</h1>
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
       <li class="nav-item dropdown">
@@ -172,7 +172,7 @@
                   <img alt="Image placeholder" src="/img/theme/team-2-800x800.jpg">
                 </span>
               <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                <span class="fullName  mb-0 text-sm  font-weight-bold"> Jones</span>
               </div>
             </div>
           </a>
@@ -215,9 +215,10 @@
     <div class="container-fluid d-flex align-items-center">
       <div class="row">
         <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white">Hello Jesse</h1>
-          <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-          <a href="#!" class="btn btn-info">Edit profile</a>
+          <h1 class="userName display-2 text-white">Hello </h1>
+          <a href="#!" id="edit-link" class="btn btn-info">Edit Profile</a>
+<!--          <a href="#!" id="save-link" class="btn btn-success" style="display: none;">Save</a>-->
+
         </div>
       </div>
     </div>
@@ -263,28 +264,23 @@
               <hr class="my-4" />
               <div>
                 <label class="form-control-label" for="input-first-name">First Name</label>
-                <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First Name" value="Jessica">
+                <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First Name" disabled>
               </div>
               <div class="mt-3">
                 <label class="form-control-label" for="input-last-name">Last Name</label>
-                <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last Name" value="Jones">
+                <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last Name" disabled>
               </div>
               <div class="mt-3">
                 <label class="form-control-label" for="input-user-name">Username</label>
-                <input type="text" id="input-user-name" class="form-control form-control-alternative" placeholder="Username" value="jessica.jones">
+                <input type="text" id="input-user-name" class="form-control form-control-alternative" placeholder="Username" disabled>
               </div>
               <div class="mt-3">
                 <label class="form-control-label" for="input-dob">Date of Birth</label>
-                <input type="date" id="input-dob" class="form-control form-control-alternative" value="1996-05-12">
+                <input type="date" id="input-dob" class="form-control form-control-alternative" disabled>
               </div>
-              <div class="mt-3">
-                <label class="form-control-label" for="input-password">Password</label>
-                <input type="password" id="input-password" class="form-control form-control-alternative" placeholder="Password" value="********">
-              </div>
-              <hr class="my-4" />
-              <p>Account Registered On:</p>
-              <p><i class="ni ni-calendar-grid-58"></i> 2021-10-01 14:23:45</p>
-              <a href="#">Show more</a>
+
+
+<!--              <a href="#">Show more</a>-->
             </div>
           </div>
         </div>
@@ -312,13 +308,13 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-patient-id">Patient ID</label>
-                      <input type="text" id="input-patient-id" class="form-control form-control-alternative" placeholder="Patient ID" >
+                      <input type="text" id="input-patient-id" class="form-control form-control-alternative" placeholder="Patient ID" disabled >
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-phone-number">Phone Number</label>
-                      <input type="text" id="input-phone-number" class="form-control form-control-alternative" placeholder="Phone Number" >
+                      <input type="text" id="input-phone-number" class="form-control form-control-alternative" placeholder="Phone Number" disabled>
                     </div>
                   </div>
                 </div>
@@ -326,13 +322,13 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-email">Email</label>
-                      <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email" >
+                      <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email" disabled>
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-address">Address</label>
-                      <input type="text" id="input-address" class="form-control form-control-alternative" placeholder="Address" >
+                      <input type="text" id="input-address" class="form-control form-control-alternative" placeholder="Address" disabled>
                     </div>
                   </div>
                 </div>
@@ -340,25 +336,25 @@
 
               <!-- Contact Information -->
               <hr class="my-4" />
-              <h6 class="heading-small text-muted mb-4">Contact Information</h6>
+              <h6 class="heading-small text-muted mb-4">Street</h6>
               <div class="pl-lg-4">
                 <div class="row">
                   <div class="col-lg-4">
                     <div class="form-group">
                       <label class="form-control-label" for="input-city">City</label>
-                      <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" >
+                      <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" disabled>
                     </div>
                   </div>
                   <div class="col-lg-4">
                     <div class="form-group">
                       <label class="form-control-label" for="input-state">State</label>
-                      <input type="text" id="input-state" class="form-control form-control-alternative" placeholder="State" >
+                      <input type="text" id="input-state" class="form-control form-control-alternative" placeholder="State" disabled>
                     </div>
                   </div>
                   <div class="col-lg-4">
                     <div class="form-group">
                       <label class="form-control-label" for="input-postal-code">Postal Code</label>
-                      <input type="text" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal Code" >
+                      <input type="text" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal Code" disabled>
                     </div>
                   </div>
                 </div>
@@ -366,7 +362,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-country">Country</label>
-                      <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" >
+                      <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" disabled>
                     </div>
                   </div>
                 </div>
@@ -378,7 +374,7 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-insurance-id">Insurance ID</label>
-                      <input type="text" id="input-insurance-id" class="form-control form-control-alternative" >
+                      <input type="text" id="input-insurance-id" class="form-control form-control-alternative" placeholder="Insurance ID" disabled>
                     </div>
                   </div>
                   <div class="col-lg-6">
@@ -392,27 +388,22 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-insurance-provider">Insurance Provider</label>
-                      <input type="text" id="input-insurance-provider" class="form-control form-control-alternative" >
+                      <input type="text" id="input-insurance-provider" class="form-control form-control-alternative" placeholder="Insurance Provider" disabled>
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-insurance-number">Insurance Number</label>
-                      <input type="text" id="input-insurance-number" class="form-control form-control-alternative" >
-                    </div>
-                  </div>
+
                 </div>
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-insurance-date">Insurance Date</label>
-                      <input type="date" id="input-insurance-date" class="form-control form-control-alternative" >
+                      <input type="date" id="input-insurance-date" class="form-control form-control-alternative" placeholder="Insurance Date" disabled>
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label" for="input-insurance-type">Insurance Type</label>
-                      <input type="text" id="input-insurance-type" class="form-control form-control-alternative" >
+                      <input type="text" id="input-insurance-type" class="form-control form-control-alternative" placeholder="Insurance Type" disabled>
                     </div>
                   </div>
                 </div>
@@ -420,8 +411,10 @@
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-control-label" for="input-coverage-details">Coverage Details</label>
-                      <textarea id="input-coverage-details" class="form-control form-control-alternative" rows="3" ></textarea>
+                      <textarea id="input-coverage-details" class="form-control form-control-alternative" rows="3" disabled></textarea>
                     </div>
+                    <a href="#!" id="save-link" class="btn btn-success" style="display: none;">Save</a>
+
                   </div>
                 </div>
               </div>
@@ -476,47 +469,284 @@
 </script>
 <script>
 
-    function fetchPatientProfile() {
-      // Fetch patient profile data from your API
-      fetch('/api/v1/patient-info')
-              .then((response) => response.json())
-              .then((data) => {
-                // Populate the fields with the returned data
-                console.log(data); // Log data for debugging
-                document.getElementById('firstName').value = data.firstName || 'N/A';
-                document.getElementById('lastName').value = data.lastName || 'N/A';
-                document.getElementById('username').value = data.username || 'N/A';
-                document.getElementById('dob').value = data.dob || 'N/A';
-                document.getElementById('gender').value = data.gender || 'N/A';
-                document.getElementById('medicalRecordNo').value = data.medicalRecordNo || 'N/A';
-              })
-              .catch((error) => console.error('Error fetching patient profile:', error));
+  console.log(getCookie('token'));
+
+  function fetchPatientInfo(patientId) {
+    fetch(`/api/patient-info/${patientId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`, // Include JWT token
+        'Content-Type': 'application/json',
+      },
+    })
+            .then((response) => {
+              console.log(response);
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data); // Debugging
+              alert(data);
+
+
+              document.getElementById('input-patient-id').value = data.patientId || '';
+              document.getElementById('input-first-name').value = data.firstName || '';
+              document.getElementById('input-last-name').value = data.lastName || '';
+              document.getElementById('input-user-name').value = data.userId || '';
+              document.getElementById('input-dob').value = data.dob || '';
+            })
+            .catch((error) => {
+              console.error('Error fetching patient contact info:', error);
+              alert('Failed to load patient contact information.');
+            });
+  }
+
+
+
+  function fetchInsuranceInfo(patientId) {
+    fetch(`/api/v1/Insurance/${patientId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`, // Include JWT token
+        'Content-Type': 'application/json',
+      },
+    })
+            .then((response) => {
+              console.log(response);
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data); // Debugging
+
+              // Populate form fields with the insurance info
+              document.getElementById('input-insurance-id').value = data.insuranceNumber || '';
+              document.getElementById('input-insurance-provider').value = data.insuranceProvider || '';
+              document.getElementById('input-insurance-type').value = data.insuranceType || '';
+              document.getElementById('input-insurance-date').value = data.insuranceDate || '';
+              document.getElementById('input-coverage-details').value = data.coverageDetails || '';
+            })
+            .catch((error) => {
+              console.error('Error fetching insurance info:', error);
+              alert('Failed to load insurance information.');
+            });
+  }
+
+
+
+
+  function fetchPatientContactInfo(patientId) {
+    fetch(`/api/v1/patientcontactinfo/${patientId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`, // Include JWT token
+        'Content-Type': 'application/json',
+      },
+    })
+            .then((response) => {
+              console.log(response);
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data); // Debugging
+
+              // Populate form fields with the contact info
+              document.getElementById('input-city').value = data.city || '';
+              document.getElementById('input-state').value = data.state || '';
+              document.getElementById('input-postal-code').value = data.postalCode || '';
+              document.getElementById('input-country').value = data.country || '';
+              document.getElementById('input-phone-number').value = data.phoneNumber || '';
+              document.getElementById('input-email').value = data.email || '';
+              document.getElementById('input-address').value = data.address || '';
+            })
+            .catch((error) => {
+              console.error('Error fetching patient contact info:', error);
+              alert('Failed to load patient contact information.');
+            });
+  }
+
+  // Call this function on page load with the patient ID
+  document.addEventListener('DOMContentLoaded', () => {
+    const patientId = getCookie('id'); // Replace this with the actual patient ID
+    fetchPatientInfo(patientId);
+    fetchInsuranceInfo(patientId);
+    fetchPatientContactInfo(patientId);
+  });
+
+  // Function to get a specific cookie value by its name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Fetch the first_name, middle_name, and last_name from the cookies
+  const firstName = getCookie('first_name') || 'Guest';
+ const middleName = getCookie('middle_name') || '';
+  const lastName = getCookie('last_name') || '';
+
+  // Format the full name
+  const fullName = `${firstName} ${lastName} `.trim();
+  console.log(fullName);
+
+  // Update the DOM to display the name
+  document.addEventListener('DOMContentLoaded', () => {
+    const userGreetingElement = document.querySelector('.userName'); // Target the element where "Hello Jesse" is written
+    if (userGreetingElement) {
+      userGreetingElement.textContent = `Hello ${firstName}`;
     }
 
-// Call this function on page load
-    document.addEventListener('DOMContentLoaded', fetchPatientProfile);
+    const navbarNameElement = document.querySelector('.fullName'); // Target the top-right navbar name
+    if (navbarNameElement) {
+      navbarNameElement.textContent = fullName;
+    }
+  });
 
-    function fetchPatientContactInfo() {
-      // Fetch patient contact info data from your API
-      fetch('/api/v1/patient-contact-info')
-              .then((response) => response.json())
-              .then((data) => {
-                // Populate the fields with the returned data
-                console.log(data); // Log data for debugging
-                document.getElementById('phoneNumber').value = data.phoneNumber || 'N/A';
-                document.getElementById('email').value = data.email || 'N/A';
-                document.getElementById('address').value = data.address || 'N/A';
-                document.getElementById('city').value = data.city || 'N/A';
-                document.getElementById('state').value = data.state || 'N/A';
-                document.getElementById('postalCode').value = data.postalCode || 'N/A';
-                document.getElementById('country').value = data.country || 'N/A';
-              })
-              .catch((error) => console.error('Error fetching contact info:', error));
+
+
+
+
+
+
+  // Utility function to toggle editability of fields
+  function toggleFieldsEditable(enable) {
+    const fields = document.querySelectorAll('input, textarea');
+    fields.forEach(field => {
+      field.disabled = !enable;
+    });
+  }
+
+  // Handle "Edit Profile" click
+  document.addEventListener('DOMContentLoaded', () => {
+    const editLink = document.getElementById('edit-link');
+    const saveLink = document.getElementById('save-link');
+
+    if (editLink) {
+      editLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default behavior
+        const isEditing = !document.getElementById('input-patient-id').disabled;
+
+        if (isEditing) {
+          // Cancel editing
+          toggleFieldsEditable(false);
+          saveLink.style.display = 'none'; // Hide the Save link
+          editLink.textContent = 'Edit Profile'; // Reset link text
+        } else {
+          // Enable editing
+          toggleFieldsEditable(true);
+          saveLink.style.display = 'inline-block'; // Show the Save link
+          editLink.textContent = 'Cancel Edit'; // Change link text
+        }
+      });
+    } else {
+      console.error('Edit link element not found in the DOM.');
     }
 
-    // Call this function on page load
-    document.addEventListener('DOMContentLoaded', fetchPatientContactInfo);
 
+    if (saveLink) {
+      saveLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default behavior
+
+
+    const patientData = {
+      patientId: document.getElementById('input-patient-id').value,
+      firstName: document.getElementById('input-first-name').value,
+      lastName: document.getElementById('input-last-name').value,
+      userId: document.getElementById('input-user-name').value,
+      dob: document.getElementById('input-dob').value,
+      email: document.getElementById('input-email').value,
+    };
+
+    const insuranceData = {
+      insuranceNumber: document.getElementById('input-insurance-id').value,
+      insuranceProvider: document.getElementById('input-insurance-provider').value,
+      insuranceType: document.getElementById('input-insurance-type').value,
+      insuranceDate: document.getElementById('input-insurance-date').value,
+      coverageDetails: document.getElementById('input-coverage-details').value,
+    };
+
+    const contactData = {
+      city: document.getElementById('input-city').value,
+      state: document.getElementById('input-state').value,
+      postalCode: document.getElementById('input-postal-code').value,
+      country: document.getElementById('input-country').value,
+      phoneNumber: document.getElementById('input-phone-number').value,
+      email: document.getElementById('input-email').value,
+      address: document.getElementById('input-address').value,
+    };
+
+    // Save all fields to the server
+    Promise.all([
+      savePatientInfo(patientData),
+      saveInsuranceInfo(patientData.patientId, insuranceData),
+      saveContactInfo(patientData.patientId, contactData),
+    ])
+            .then(() => {
+              alert('Profile updated successfully!');
+              toggleFieldsEditable(false);
+              saveLink.style.display = 'none'; // Hide the Save link
+              editLink.textContent = 'Edit Profile'; // Reset the Edit link text
+            })
+            .catch(error => {
+              console.error('Error saving data:', error);
+              alert('Failed to save changes.');
+            });
+      });
+    } else {
+      console.error('Save link element not found in the DOM.');
+    }
+  });
+
+  function savePatientInfo(data) {
+    console.log(data);
+    return fetch(`/api/patient-info/${data.patientId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'Content-Type': 'application/json', // Ensure this header is included
+      },
+      body: JSON.stringify(data), // Convert the data object to a JSON string
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to save patient info: ${response.statusText}`);
+      }
+      return response.json(); // Return the server's response as JSON
+    });
+  }
+
+
+  function saveInsuranceInfo(patientId, data) {
+    return fetch(`/api/v1/Insurance/${patientId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(response => {
+      if (!response.ok) throw new Error(`Failed to save insurance info: ${response.statusText}`);
+    });
+  }
+
+  function saveContactInfo(patientId, data) {
+    return fetch(`/api/v1/patientcontactinfo/${patientId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(response => {
+      if (!response.ok) throw new Error(`Failed to save contact info: ${response.statusText}`);
+    });
+  }
 
 </script>
 
@@ -524,20 +754,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
