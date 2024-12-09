@@ -250,7 +250,7 @@
                 <div class="col">
                     <h1 class="display-2 text-white">Hello Sarah</h1>
                     <!--                    <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>-->
-                    <a id="edit-profile-button" class="btn btn-info">Edit profile</a>
+<!--                    <a id="edit-profile-button" class="btn btn-info">Edit profile</a>-->
                 </div>
             </div>
         </div>
@@ -283,67 +283,128 @@
             </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card bg-secondary shadow">
-                    <div class="card-header bg-white border-0">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="mb-0">My account</h3>
-                            </div>
-                            <div class="col-4 text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">Settings</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <form>
-                            <h6 class="heading-small text-muted mb-4">User information</h6>
-                            <div class="pl-lg-4">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-username">Username</label>
-                                            <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="sarahcarter">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-email">Email address</label>
-                                            <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="sarah.carter@gmail.com">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-first-name">First name</label>
-                                            <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Sarah">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-middle-name">Middle name</label>
-                                            <input type="text" id="input-middle-name" class="form-control form-control-alternative" placeholder="Middle name" value="Elizabeth">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-last-name">Last name</label>
-                                            <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Carter">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-contact-number">Contact Number</label>
-                                            <input type="text" id="input-contact-number" class="form-control form-control-alternative" placeholder="Contact Number" value="+1 (829)-126-2024">
-                                        </div>
+                    <div class="card bg-secondary shadow">
+                        <div class="card bg-secondary shadow">
+                            <div class="card-header bg-white border-0">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Add Medical Status</h3>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-
-                        <!-- Save Button -->
-                        <div class="text-right">
-                            <button id="save-profile-button" class="btn btn-sm btn-primary" style="display: none;">Save</button>
+                            <div class="card-body">
+                                <form id="medical-status-form">
+                                    <h6 class="heading-small text-muted mb-4">Add Medical Information And Prescription </h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-allergies">Allergies</label>
+                                                    <input type="text" id="input-allergies" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-past-diseases">Past Diseases</label>
+                                                    <input type="text" id="input-past-diseases" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-ongoing-medication">Ongoing Medication</label>
+                                                    <input type="text" id="input-ongoing-medication" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-doctor-notes">Doctor Notes</label>
+                                                    <input type="text" id="input-doctor-notes" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-allergy-type">Allergy Type</label>
+                                                    <input type="text" id="input-allergy-type" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-severity-of-allergy">Severity of Allergy</label>
+                                                    <input type="text" id="input-severity-of-allergy" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-medication-changes">Medication Changes</label>
+                                                    <input type="text" id="input-medication-changes" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-patient-notes">Patient Notes</label>
+                                                    <input type="text" id="input-patient-notes" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-history-status">History Status</label>
+                                                    <input type="text" id="input-history-status" class="form-control form-control-alternative">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-active">Active</label>
+                                                    <select id="input-active" class="form-control form-control-alternative">
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- New Prescription Fields -->
+                                        <h6 class="heading-small text-muted mt-4 mb-4">Prescription Information</h6>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-medication">Medication</label>
+                                                    <input type="text" id="input-medication" class="form-control form-control-alternative" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-dosage">Dosage</label>
+                                                    <input type="text" id="input-dosage" class="form-control form-control-alternative" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-frequency">Frequency</label>
+                                                    <input type="text" id="input-frequency" class="form-control form-control-alternative" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-duration">Duration</label>
+                                                    <input type="text" id="input-duration" class="form-control form-control-alternative" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-primary">Add Medical Status</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -456,6 +517,91 @@
             profileContainer.innerHTML = `<h3>Error loading medical history.</h3>`;
         }
     });
+
+    document.getElementById("medical-status-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Function to get a specific cookie value by its name
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+
+        // Get patientId and staffId from cookies
+        const patientId = getCookie("patientId");
+        const staffId = getCookie("id");
+
+        if (!patientId || !staffId) {
+            alert("Patient ID or Staff ID not found in cookies.");
+            return;
+        }
+
+        const todayDate = new Date().toISOString().split("T")[0]; // Today's date in YYYY-MM-DD format
+
+        // Prepare Medical Status Data
+        const medicalStatus = {
+            patientId: parseInt(patientId, 10),
+            allergies: document.getElementById("input-allergies").value,
+            pastDiseases: document.getElementById("input-past-diseases").value,
+            ongoingMedication: document.getElementById("input-ongoing-medication").value,
+            doctorNotes: document.getElementById("input-doctor-notes").value,
+            allergyType: document.getElementById("input-allergy-type").value,
+            severityOfAllergy: document.getElementById("input-severity-of-allergy").value,
+            medicationChanges: document.getElementById("input-medication-changes").value,
+            patientNotes: document.getElementById("input-patient-notes").value,
+            historyStatus: document.getElementById("input-history-status").value,
+            active: document.getElementById("input-active").value === "1",
+        };
+
+        // Prepare Prescription Data
+        const prescription = {
+            patientId: parseInt(patientId, 10),
+            staffId: parseInt(staffId, 10),
+            issueDate: todayDate,
+            medication: document.getElementById("input-medication").value,
+            dosage: document.getElementById("input-dosage").value,
+            frequency: document.getElementById("input-frequency").value,
+            duration: document.getElementById("input-duration").value,
+        };
+
+        try {
+            // Submit Medical Status
+            const medicalStatusResponse = await fetch("/api/medicalhistory/MedicalHistory", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(medicalStatus),
+            });
+
+            if (!medicalStatusResponse.ok) {
+                throw new Error("Failed to submit medical status.");
+            }
+
+            // Submit Prescription
+            const prescriptionResponse = await fetch("/prescriptions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(prescription),
+            });
+
+            if (!prescriptionResponse.ok) {
+                throw new Error("Failed to submit prescription.");
+            }
+
+            alert("Medical status and prescription submitted successfully!");
+            document.getElementById("medical-status-form").reset();
+            window.location.href = '/medical-history';
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred while submitting the data.");
+        }
+    });
+
+
 
 </script>
 
