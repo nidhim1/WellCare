@@ -46,8 +46,13 @@ public class PageController {
         return "staff-all-appointments";
     }
 
+    @GetMapping("/medical-history")
+    public String showMedicalHistoryPage() {
+        return "medical-history";
+    }
+
    public String showPatientDashboardPage() { return "patient-dashboard"; }
-  
+
     // Prescription Management Page
     @GetMapping("/prescriptions-management")
     public String showPrescriptionManagementPage() {

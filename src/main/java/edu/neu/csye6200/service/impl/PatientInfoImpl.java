@@ -36,20 +36,42 @@ public class PatientInfoImpl implements PatientInfo {
             throw new RuntimeException("Patient not found with ID: " + patientId);
         }
         Patient patient = optionalPatient.get();
-        patient.setFirstName(patientInfoDTO.getFirstName());
-        patient.setMiddleName(patientInfoDTO.getMiddleName());
-        patient.setLastName(patientInfoDTO.getLastName());
-        patient.setUserName(patientInfoDTO.getUserId());
-        patient.setPassword(patientInfoDTO.getPassword());
-        patient.setGender(Patient.Gender.valueOf(patientInfoDTO.getGender()));
-        try {
-            patient.setDob(dateFormat.parse(patientInfoDTO.getDob()));
-        } catch (ParseException e) {
-            throw new RuntimeException("Invalid date format. Expected format: yyyy-MM-dd");
+
+        // Update fields only if they are non-null
+        if (patientInfoDTO.getFirstName() != null) {
+            patient.setFirstName(patientInfoDTO.getFirstName());
         }
+        if (patientInfoDTO.getMiddleName() != null) {
+            patient.setMiddleName(patientInfoDTO.getMiddleName());
+        }
+        if (patientInfoDTO.getLastName() != null) {
+            patient.setLastName(patientInfoDTO.getLastName());
+        }
+        if (patientInfoDTO.getUserId() != null) {
+            patient.setUserName(patientInfoDTO.getUserId());
+        }
+        if (patientInfoDTO.getPassword() != null) {
+            patient.setPassword(patientInfoDTO.getPassword());
+        }
+        if (patientInfoDTO.getGender() != null) {
+            patient.setGender(Patient.Gender.valueOf(patientInfoDTO.getGender()));
+        }
+        if (patientInfoDTO.getDob() != null) {
+            try {
+                patient.setDob(dateFormat.parse(patientInfoDTO.getDob()));
+            } catch (ParseException e) {
+                throw new RuntimeException("Invalid date format. Expected format: yyyy-MM-dd");
+            }
+        }
+        if (patientInfoDTO.getMedicalRecordNo() != null) {
+            patient.setMedicalRecordNo(patientInfoDTO.getMedicalRecordNo());
+        }
+
+        // Save updated patient
         Patient updatedPatient = patientInfoRepository.save(patient);
         return mapEntityToDTO(updatedPatient);
     }
+
 
     @Override
     public PatientInfoDTO getPatientById(int patientId) {

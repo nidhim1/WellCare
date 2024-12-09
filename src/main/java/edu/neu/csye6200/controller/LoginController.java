@@ -76,7 +76,7 @@ public class LoginController {
             createCookie("middle_name", authenticatedPatient.getMiddleName(), response);
             createCookie("last_name", authenticatedPatient.getLastName(), response);
 
-            responseBody.put("redirectUrl", "/patient-dashboard.html");
+            responseBody.put("redirectUrl", "/patient-dashboard");
             return ResponseEntity.ok(responseBody);
         } else if (authenticatedStaff != null) {
             String token = jwtUtil.generateToken(loginDTO.getUsername());
@@ -89,9 +89,9 @@ public class LoginController {
             createCookie("last_name", authenticatedStaff.getLastName(), response);
 
             if ("doctor".equalsIgnoreCase(authenticatedStaff.getRole())) {
-                responseBody.put("redirectUrl", "/doctor-dashboard.html");
+                responseBody.put("redirectUrl", "/doctor-dashboard");
             } else {
-                responseBody.put("redirectUrl", "/staff-dashboard.html");
+                responseBody.put("redirectUrl", "/staff-dashboard");
             }
             return ResponseEntity.ok(responseBody);
         } else {
