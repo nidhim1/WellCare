@@ -51,7 +51,6 @@ public class PageController {
         return "medical-history";
     }
 
-}
     // Prescription Management Page
     @GetMapping("/prescriptions-management")
     public String showPrescriptionManagementPage() {

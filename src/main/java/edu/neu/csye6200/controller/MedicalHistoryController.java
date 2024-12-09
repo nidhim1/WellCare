@@ -56,8 +56,8 @@ public class MedicalHistoryController {
     }
 
     @GetMapping("/medical-history/{id}")
-    public ResponseEntity<MedicalHistoryDTO> getMedicalHistoryByPatientId(@PathVariable Long id) {
-        MedicalHistoryDTO history = medicalHistoryService.getMedicalHistoryById(id);
+    public ResponseEntity<MedicalHistoryDTO> getMedicalHistoryByPatientId(@PathVariable("id") Long patientId) {
+        MedicalHistoryDTO history = medicalHistoryService.getMedicalHistoryByPatientId(patientId);
         return ResponseEntity.ok(history);
     }
 
