@@ -16,21 +16,21 @@ resource utilization, and ultimately elevate the quality of patient care.
 ---
 
 ## Tech Stack:
-**Frontend**:
+* **Frontend**:
   * Thymeleaf, HTML, CSS, JavaScript, Bootstrap
-**Backend**:
+* **Backend**:
   * Java, Spring Boot, Spring MVC, Spring Data JPA
   * APIs
-**Database**:
+* **Database**:
   * MySQL
   * WampServer (for data schema visualization and management)
-**DevOps & Tools**:
+* **DevOps & Tools**:
   * Git (version control), GitHub (repository hosting)
   * Maven (build automation)
   * Bruno (API testing)
-**Security**:
+* **Security**:
   * Spring Security, JWT (for authentication and session handling)
-**IDE**:
+* **IDE**:
   * IntelliJ IDEA (for Java development and project management)
 
 ---
