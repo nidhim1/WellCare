@@ -1,9 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/6xRviSdT)
-# Welcome to the course CSYE6200- Concepts of Object Oriented Design
-> Northeastern University, College of Engineering
-
-# Video Link : https://northeastern-my.sharepoint.com/:v:/r/personal/lodh_y_northeastern_edu/Documents/1733768115620258.mov?csf=1&web=1&e=ZFiLMQ&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D
-
 # WellCare
 
 > Hospitals today face increasing challenges in managing their operations efficiently due to growing
@@ -18,6 +12,27 @@ impacting care quality. The WellCare - Hospital Management System addresses thes
 offering a comprehensive platform to streamline scheduling, centralize patient data, and improve patient
 engagement. By integrating modern technologies, it aims to enhance operational efficiency, optimize
 resource utilization, and ultimately elevate the quality of patient care.
+
+---
+
+## Tech Stack:
+**Frontend**:
+  * Thymeleaf, HTML, CSS, JavaScript, Bootstrap
+**Backend**:
+  * Java, Spring Boot, Spring MVC, Spring Data JPA
+  * APIs
+**Database**:
+  * MySQL
+  * WampServer (for data schema visualization and management)
+**DevOps & Tools**:
+  * Git (version control), GitHub (repository hosting)
+  * Maven (build automation)
+  * Bruno (API testing)
+**Security**:
+  * Spring Security, JWT (for authentication and session handling)
+**IDE**:
+  * IntelliJ IDEA (for Java development and project management)
+
 ---
 
 ## How to Build and Run the Project
@@ -64,29 +79,3 @@ resource utilization, and ultimately elevate the quality of patient care.
 7. **Run the packaged JAR**
     ```bash
    java -jar target/<artifact-name>.jar
-
-## Professor: Daniel Peters
-
-### Requirements
-1. Eclipse or VS Code or IntelliJ.
-
-Note: If you are using Eclipse, please have git CLI installed on your system or GitHub Desktop to commit the code in this repository
-
-### SetUp Instructions
-1. Please clone the repository on your local system
-2. For Eclipse Import the project as Existing Maven Project, For IntelliJ you can directlty open it using 'Get from VCS'.
-3. All code should be pushed to the main branch
-4. Ensure the GitHub actions are successful post push
-
-Submissions will have deadlines, failed GitHub Actions would result in point deductions.
-
-### References
-1. Cloning a Repository: <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>
-2. Any GitHub Setup: Please refer to the Git & GitHub Fundamentals Repository shared to you by your respective TA and refer the README.md section
-
-Please reach out to your respective TA if you need any help in regards with submission/ GitHub
-
-Author:
-- Rohan Vasudev Ginde (ginde.r@northeastern.edu)
-- Yesha Joshi (joshi.ye@northeastern.edu)
-
